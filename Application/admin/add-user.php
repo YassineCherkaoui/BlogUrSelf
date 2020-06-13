@@ -31,7 +31,7 @@ if (!$user->is_logged_in()) {
 			<i class="fa fa-bars"></i>
 			<span>Close</span>
 		</a>
-		<div class="logo">
+		<div class="logo"><img src="../style/images/fiveicon.png" width="2%">
 			Admin Panel
 		</div>
 	</div>
