@@ -36,6 +36,7 @@ if (isset($_GET['delpost'])) {
 	<link rel="stylesheet" href="../style/css/admin.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
 	<scrip>
 		<script language="JavaScript" type="text/javascript">
 			function delpost(id, title) {
@@ -52,15 +53,15 @@ if (isset($_GET['delpost'])) {
 			<i class="fa fa-bars"></i>
 			<span>Close</span>
 		</a>
-		<div class="logo">
+		<div class="logo"><img src="../style/images/fiveicon.png" width="2%">
 			Admin Panel
 		</div>
 	</div>
 	<div class="sidebar">
 		<ul>
-			<li><a href="#"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
-			<li><a href="#"><i class="fa fa-users"></i><span>Users</span></a></li>
-			<li><a href="#"><i class="fa fa-calendar"></i><span>Calendar</span></a></li>
+			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
+			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
+			<li><a href="#"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
 			<li><a href="#"><i class="fas fa-envelope-square"></i><span>Messages</span></a></li>
 			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
 		</ul>
@@ -114,7 +115,7 @@ if (isset($_GET['delpost'])) {
 			</table>
 		</div>
 		<a href="add-post.php" class="btn btn-info btn-lg">
-			<span class="glyphicon glyphicon-plus-sign"></span> Plus
+			<span class="glyphicon glyphicon-plus-sign"></span> Add Blog
 		</a>
 	</div>
 
