@@ -173,6 +173,7 @@
   <br>
 
 
+<<<<<<< HEAD
 
 
   <!-- Footer -->
@@ -218,6 +219,126 @@
 
   <!-- Custom scripts for this template -->
   <script src="style/js/clean-blog.min.js"></script>
+=======
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand" href="index.php"><img src="style/images/logo.png" width="23%"></a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="index.php">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="about.php">About</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="contact.php">Contact</a>
+					</li>
+					<li class="nav-item">
+						<a class="btn" href="#" style="color: #FFC273;">JointUS</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Header -->
+	<header class="masthead" style="background-image: url('style/home/img/home-bg.jpg')">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 mx-auto">
+					<div class="site-heading">
+						<h1>BlogUrSelf</h1>
+						<span class="subheading">Create a unique and beautiful blog. It’s easy and free.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Main Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-10 mx-auto">
+				<?php
+				try {
+
+					$stmt = $db->query('SELECT postID, postTitle, postDesc, postDate FROM blog_posts ORDER BY postID DESC');
+					while ($row = $stmt->fetch()) {
+
+						echo '<div class="post-preview">';
+						echo '<a href="viewpost.php?id=' . $row['postID'] . '">';
+						echo '<h2 class="post-title">
+            ' . $row['postTitle'] . '
+            </h2>';
+						echo '<h3 class="post-subtitle">' . $row['postDesc'] . '</h3></a>';
+						echo '<p class="post-meta">Posted on ' . date('jS M Y H:i:s', strtotime($row['postDate'])) . '</p>';
+						echo '</div>';
+						echo '<hr>';
+					}
+				} catch (PDOException $e) {
+					echo $e->getMessage();
+				}
+				?>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
+	<hr>
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 mx-auto">
+					<ul class="list-inline text-center">
+						<li class="list-inline-item">
+							<a href="#">
+								<span class="fa-stack fa-lg">
+									<i class="fas fa-circle fa-stack-2x"></i>
+									<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+								</span>
+							</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#">
+								<span class="fa-stack fa-lg">
+									<i class="fas fa-circle fa-stack-2x"></i>
+									<i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+								</span>
+							</a>
+						</li>
+						<li class="list-inline-item">
+							<a href="#">
+								<span class="fa-stack fa-lg">
+									<i class="fas fa-circle fa-stack-2x"></i>
+									<i class="fab fa-github fa-stack-1x fa-inverse"></i>
+								</span>
+							</a>
+						</li>
+					</ul>
+					<p class="copyright text-muted">Copyright &copy; For BlogUrSelf2020</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="style/style/style/vendor/jquery/jquery.min.js"></script>
+	<script src="style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Custom scripts for this template -->
+	<script src="style/js/clean-blog.min.js"></script>
+>>>>>>> 15caeb3eba66ce9be5afea3905d879626ae50edd
 
 </body>
 
