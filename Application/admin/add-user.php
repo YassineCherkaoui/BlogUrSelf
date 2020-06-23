@@ -74,6 +74,9 @@ if (!$user->is_logged_in()) {
 			if ($email == '') {
 				$error[] = 'Please enter the email address.';
 			}
+			if ($typeuser == '') {
+				$error[] = 'Please enter the type of user.';
+			}
 
 			if (!isset($error)) {
 
@@ -82,11 +85,12 @@ if (!$user->is_logged_in()) {
 				try {
 
 					//insert into database
-					$stmt = $db->prepare('INSERT INTO blog_members (username,password,email) VALUES (:username, :password, :email)');
+					$stmt = $db->prepare('INSERT INTO blog_members (username,password,email,typeuser) VALUES (:username, :password, :email, :typeuser)');
 					$stmt->execute(array(
 						':username' => $username,
 						':password' => $hashedpassword,
-						':email' => $email
+						':email' => $email,
+						':typeuser' => $typeuser
 					));
 
 					//redirect to index page
@@ -142,13 +146,24 @@ if (!$user->is_logged_in()) {
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="control-label col-xs-4">Type</label>
+				<div class="col-xs-8">
+					<select class="form-control" id="exampleFormControlSelect1" name="typeuser" value="<?php if (isset($error)) {
+																											echo $_POST['typeuser'];
+																										} ?>" required="required">
+						<option value="Admin">Admin</option>
+						<option value="User">User</option>
+					</select>
+				</div>
+			</div>
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-4">Add photo</label>
 				<div class="col-xs-8">
 					<input type="file" class="form-control" name="photo" accept="image/*" value="<?php if (isset($error)) {
 																										echo $_POST['photo'];
 																									} ?>" required="required">
 				</div>
-			</div>
+			</div> -->
 			<div class="form-group">
 				<div class="col-xs-8 col-xs-offset-4">
 					<button type="submit" class="btn btn-primary btn-lg">Add User</button>

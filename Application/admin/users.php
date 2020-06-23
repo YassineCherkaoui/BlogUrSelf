@@ -84,6 +84,7 @@ if (isset($_GET['deluser'])) {
 						<th>#</th>
 						<th>Username</th>
 						<th>Email</th>
+						<th>Type</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -91,17 +92,18 @@ if (isset($_GET['deluser'])) {
 					<?php
 					try {
 
-						$stmt = $db->query('SELECT memberID, username, email FROM blog_members ORDER BY username');
+						$stmt = $db->query('SELECT memberID, username, email, type FROM blog_members ORDER BY username');
 						while ($row = $stmt->fetch()) {
 
 							echo '<tr>';
 							echo '<th>' . $row['memberID'] . '</th>';
 							echo '<td>' . $row['username'] . '</td>';
 							echo '<td>' . $row['email'] . '</td>';
+							echo '<td>' . $row['type'] . '</td>';
 					?>
 
 							<td>
-								<a class="btn btn-primary" href="edit-post.php?id=<?php echo $row['memberID']; ?>" role="button">Edit</a>
+								<a class="btn btn-primary" href="edit-user.php?id=<?php echo $row['memberID']; ?>" role="button">Edit</a>
 								<?php if ($row['memberID'] != 1) { ?>
 									<a class="btn btn-primary" href="javascript:delpost('<?php echo $row['memberID']; ?>','<?php echo $row['username']; ?>')">Delete</a>
 								<?php } ?>

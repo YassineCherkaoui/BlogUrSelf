@@ -27,12 +27,15 @@ if ($row['postID'] == '') {
 	<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 	<link rel="shortcut icon" href="style/images/fiveicon.png" type="image/x-icon">
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 	<!-- Custom styles for this template -->
 	<link href="style/home/css/clean-blog.min.css" rel="stylesheet">
 	<link href="style/home/css/post.css" rel="stylesheet">
 
 
-	<title>blogUeSelf<?php echo $row['postTitle']; ?></title>
+	<title>blogUeSelf <?php echo $row['postTitle']; ?></title>
 </head>
 
 <body>
@@ -90,9 +93,9 @@ if ($row['postID'] == '') {
 					<button class="follow-btn">Follow</button>
 				</div>
 				<div>
-					<span class="social"><a href="https://codepen.io/robjoeol/"><i class="fa fa-codepen"></i></a><span>
-							<span class="social"><a href="https://github.com/robole/"><i class="fa fa-github"></i></span>
-							<span class="social"><a href="#"><i class="fa fa-bookmark-o"></i></a></span>
+					<span class="social"><a href="#"><i class="fa fa-facebook"></i></a><span>
+							<span class="social"><a href="#"><i class="fa fa-instagram"></i></span>
+							<span class="social"><a href="#"><i class="fa fa-whatsapp"></i></a></span>
 				</div>
 				<span class="publish-date">Apr. 16, 2020</span>
 				<span class="reading-time">3 min read</span>
@@ -103,6 +106,7 @@ if ($row['postID'] == '') {
 			echo '<p>' . $row['postCont'] . '</p>';
 			?>
 		</article>
+		<hr>
 		<h2>Dont go! Read more articles from this author!</h2>
 		<section class="recommended-articles">
 			<ul>

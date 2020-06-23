@@ -61,7 +61,7 @@ if (isset($_GET['delpost'])) {
 		<ul>
 			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
 			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
-			<li><a href="#"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
+			<li><a href="../"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
 			<li><a href="#"><i class="fas fa-envelope-square"></i><span>Messages</span></a></li>
 			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
 		</ul>
@@ -99,7 +99,7 @@ if (isset($_GET['delpost'])) {
 					?>
 
 							<td>
-								<a class="btn btn-primary" href="edit-post.php?id=<?php echo $row['postID']; ?>" role="button">Link</a>
+								<a class="btn btn-primary" href="edit-post.php?id=<?php echo $row['postID']; ?>" role="button">Edit</a>
 								<a class="btn btn-primary" href="javascript:delpost('<?php echo $row['postID']; ?>','<?php echo $row['postTitle']; ?>')">Delete</a>
 							</td>
 
