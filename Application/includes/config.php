@@ -1,22 +1,39 @@
 <?php
 ob_start();
-session_start();
+// session_start();
 
-//database credentials
 $servername = "localhost";
 $username = "root";
+// $password = ""; if you dont have any password
 $password = "";
-// define('DBHOST','localhost');
-// define('DBUSER','root');
-// define('DBPASS','');
-// define('DBNAME','bbg');
+$dbname = "bbg";
 
-$db = new PDO("mysql:host=$servername;dbname=bbg", $username, $password);
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Create connection
+$db = new mysqli($servername, $username, $password,$dbname );
+
+// Check connection
+if ($db->connect_error) {
+    die("Connection failed: " . $db->connect_error);
+}
+// echo "Connected successfully";
 
 
-//set timezone
-date_default_timezone_set('Europe/London');
+
+
+
+// //database credentials
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// // define('DBHOST','localhost');
+// // define('DBUSER','root');
+// // define('DBPASS','');
+// // define('DBNAME','bbg');
+
+// $db = new PDO("mysql:host=$servername;dbname=bbg", $username, $password);
+// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
 
 //load classes as needed
 spl_autoload_register(function ($class) {

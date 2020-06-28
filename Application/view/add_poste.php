@@ -28,24 +28,7 @@ if (!$user->is_logged_in()) {
 </head>
 
 <body>
-	<div class="header">
-		<a href="#" id="menu-action">
-			<i class="fa fa-bars"></i>
-			<span>Close</span>
-		</a>
-		<div class="logo"><img src="../style/images/fiveicon.png" width="2%">
-			Admin Panel
-		</div>
-	</div>
-	<div class="sidebar">
-		<ul>
-			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
-			<li><a href="#"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
-			<li><a href="#"><i class="fas fa-envelope-square"></i><span>Messages</span></a></li>
-			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
-		</ul>
-	</div>
+	
 	<div class="row">
 		<div class="col-md-12">
 			<?php
@@ -103,6 +86,12 @@ if (!$user->is_logged_in()) {
 
 			<form action="" method="post">
 				<h1> Add Post </h1>
+
+				<input type="hidden" name="size" value="1000000">
+  	<div>
+  	  <input type="file" name="image">
+  	</div>
+  	<div>
 
 				<fieldset>
 
