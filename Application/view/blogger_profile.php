@@ -150,7 +150,7 @@ session_start();
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="../controller/blogger_profile_back.php" method="POST">
+                    <form action="../controller/blogger_profile_back.php" method="POST" enctype="multipart/form-data">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#infoPanel" role="tab">Personal Info
@@ -176,40 +176,34 @@ session_start();
                              
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Username</label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <input type="hidden" name="userid"value="<?= $row3["author_id"]; ?>">
+                                    <input type="text" name="username" class="form-control" id="exampleFormControlInput1"
                                         placeholder="" value="<?= $row3["username"]; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
                                         placeholder="" value="<?= $row3["email"]; ?>">
                                 </div>
                                 <button class="btn btn-secondary" id="infoContinue">Continue</button>
                             </div>
                             <div class="tab-pane fade" id="ads" role="tabpanel">
 
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Cover image</label>
-                                    <input type="file" class="form-control-file" id="exampleInputFile"
-                                        aria-describedby="fileHelp">
-                                    <small id="fileHelp" class="form-text text-muted">Select a file to use as the
-                                        fullscreen ad image. Please ensure the size is at least 1080x1920 with a 9:16
-                                        (portrait) aspect ratio.</small>
-                                </div>
+                            
                                 <div class="form-group">
                                     <label for="exampleInputFile">Profil image</label>
-                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                    <input type="file" name="profile_img" class="form-control-file" id="exampleInputFile"
                                         aria-describedby="fileHelp">
                                     <small id="fileHelp" class="form-text text-muted">Select a file to use as the banner
                                         ad image. Please ensure the size is exactly 1080x450 for proper
                                         rendering.</small>
                                 </div>
-                                <button class="btn btn-secondary" id="adsContinue">Continue</button>
+                                <button  name="uploadImage" class="btn btn-secondary" id="adsContinue">Continue</button>
                             </div>
                             <div class="tab-pane fade" id="placementPanel" role="tabpanel">
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">How Are You ?</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"><?= $row3["author_bio"]; ?></textarea>
+                                    <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="3"><?= $row3["author_bio"]; ?></textarea>
                                 </div>
                               
                                 <button class="btn btn-secondary" id="placementContinue">Continue</button>
@@ -219,17 +213,17 @@ session_start();
 
                                 <div class="form-group">
                                     <label for="Facebbook">Facebbook</label>
-                                    <input type="text" class="form-control" id="Facebbook"
+                                    <input type="text" name="fb" class="form-control" id="Facebbook"
                                         placeholder="https://www.facebook.com/" value="<?= $row3["fb_account"]; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="Instagram">Instagram</label>
-                                    <input type="text" class="form-control" id="Instagram"
+                                    <input type="text" name="insta" class="form-control" id="Instagram"
                                         placeholder="https://www.instagram.com/" value="<?= $row3["insta_account"]; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="Twitter">Twitter</label>
-                                    <input type="text" class="form-control" id="Twitter"
+                                    <input type="text" name="twit" class="form-control" id="Twitter"
                                         placeholder="https://twitter.com/explore" value="<?= $row3["twit_account"]; ?>">
                                 </div>
 
@@ -238,13 +232,14 @@ session_start();
                             </div>
                             
                         </div>
+                        <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" name="editUserProfile"class="btn btn-primary">Save for later</button>
+                </div>
                        
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save for later</button>
-                </div>
+                
             </div>
         </div>
     </div>
