@@ -1,5 +1,7 @@
-<?php require('../includes/config.php'); 
-session_start();
+<?php
+ require('../includes/config.php'); 
+ require('../includes/session.php'); 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +110,10 @@ session_start();
 
 
                             <div class="avatar">
-                                <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU0NjQzOTk4OTQ4OTkyMzQy/ansel-elgort-poses-for-a-portrait-during-the-baby-driver-premiere-2017-sxsw-conference-and-festivals-on-march-11-2017-in-austin-texas-photo-by-matt-winkelmeyer_getty-imagesfor-sxsw-square.jpg"
+                            <?php
+                            echo messageError();
+				            echo messageErrorType();?>
+                                <img src="<?= $row3["author_img"]; ?>"
                                     alt="Circle Image" class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">

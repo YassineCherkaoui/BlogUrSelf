@@ -25,4 +25,24 @@ function message2()
    }
 }
 
+function messageError()
+{
+   if (isset($_SESSION["message3"])) {
+       $output = '<div class="message2">';
+       $output .=htmlentities($_SESSION["message3"]);
+       $output .="</div>";
+       $_SESSION["message3"] = null;
+       return $output;
+   }
+}
+function messageErrorType()
+{
+   if (isset($_SESSION["message4"])) {
+       $output = '<div class="message2">';
+       $output .=htmlentities($_SESSION["message4"]);
+       $output .="</div>";
+       $_SESSION["message4"] = null;
+       return $output;
+   }
+}
 ?>
