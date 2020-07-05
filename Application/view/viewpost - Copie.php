@@ -1,13 +1,15 @@
-<?php require('includes/config.php');
+<?php require('../includes/config.php');
 
-$stmt = $db->prepare('SELECT postID, postTitle, postCont, postDate FROM blog_posts WHERE postID = :postID');
-$stmt->execute(array(':postID' => $_GET['id']));
+$id= 1;
+$stmt = $db->prepare('SELECT * FROM blog_posts WHERE postID = ?');
+$stmt->bind_param("i",  $id);
+$stmt->execute();
 $row = $stmt->fetch();
 //if post does not exists redirect user.
-if ($row['postID'] == '') {
-	header('Location: ./');
-	exit;
-}
+// if ($row['postID'] == '') {
+// 	header('Location: ./');
+// 	exit;
+// }
 
 ?>
 <!doctype html>
@@ -20,7 +22,7 @@ if ($row['postID'] == '') {
 
 	<!-- Bootstrap CSS -->
 	<!-- Bootstrap core CSS -->
-	<link href="style/home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../style/home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom fonts for this template -->
 	<link href="style/home/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,8 +33,8 @@ if ($row['postID'] == '') {
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 	<!-- Custom styles for this template -->
-	<link href="style/home/css/clean-blog.min.css" rel="stylesheet">
-	<link href="style/home/css/post.css" rel="stylesheet">
+	<link href="../style/home/css/clean-blog.min.css" rel="stylesheet">
+	<link href="../style/home/css/post.css" rel="stylesheet">
 
 
 	<title>blogUeSelf <?php echo $row['postTitle']; ?></title>
@@ -103,12 +105,12 @@ if ($row['postID'] == '') {
 			</header>
 			<img src="https://dev-to-uploads.s3.amazonaws.com/i/3hj2gsz3ipnwo2sgeftg.jpg" alt="subzero cool peeps" />
 			<?php
-			echo '<p>' . $row['postCont'] . '</p>';
+			echo '<p>' .'dsdsds'. $row['postTitle'] . '</p>';
 			?>
 		</article>
 		<hr>
 		<h2>Dont go! Read more articles from this author!</h2>
-		<section class="recommended-articles">
+		<!-- <section class="recommended-articles">
 			<ul>
 				<?php
 				try {
@@ -134,7 +136,7 @@ if ($row['postID'] == '') {
 				}
 				?>
 			</ul>
-		</section>
+		</section> -->
 	</main>
 	<!-- Footer -->
 	<footer>
@@ -174,11 +176,11 @@ if ($row['postID'] == '') {
 	</footer>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="style/style/style/vendor/jquery/jquery.min.js"></script>
-	<script src="style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="../style/style/style/vendor/jquery/jquery.min.js"></script>
+	<script src="../style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 	<!-- Custom scripts for this template -->
-	<script src="style/js/clean-blog.min.js"></script>
+	<script src="../style/js/clean-blog.min.js"></script>
 
 </body>
 

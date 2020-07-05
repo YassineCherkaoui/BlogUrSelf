@@ -36,7 +36,10 @@
 <body class="profile-page">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><img src="../style/images/logo.png" width="23%"></a>
+            <a class="navbar-brand" href="index.html"><img src="../style/images/logo.png"  style="
+    width: 17%;
+    margin-top: -2%;
+"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -67,7 +70,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="add_poste.php">Add poste</a>
                             <a class="dropdown-item" id="modalToggle" href="#">Edit prolile</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="logout.php">Logout</a>
                             <!-- <div class="dropdown-divider"></div>
                             <button  class="btn btn-primary dropdown-item" >Launch the modal</button> -->
                         </div>
@@ -443,8 +446,9 @@
     }
 
     .profile-page .profile img {
-        max-width: 160px;
-        width: 100%;
+        
+        width: 169px;
+        height: 169px;
         margin: 0 auto;
         -webkit-transform: translate3d(0, -50%, 0);
         -moz-transform: translate3d(0, -50%, 0);

@@ -8,6 +8,9 @@ require('../includes/session.php');
 
 if(isset($_POST["Register_submit"])){
 
+
+    $profileImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9udgxAbqFle_fg9JxAcx3664ExAzNCDPOS0_BlmL807VroEc&s";
+
     $username = $_POST['username'];
 	$email = $_POST['email'];
     $password = $_POST['password'];
@@ -36,8 +39,8 @@ if(isset($_POST["Register_submit"])){
 
         
     }else{
-        $stmt =$db->prepare("INSERT Into author (username,email,password) values(?,?,?)");
-		$stmt->bind_param("sss", $username, $email, $password_hash);
+        $stmt =$db->prepare("INSERT Into author (username,email,password,author_img) values(?,?,?,?)");
+		$stmt->bind_param("ssss", $username, $email, $password_hash,$profileImg);
 		$stmt->execute();		
         header("Location: ../view/login.php");
         $_SESSION["message2"] ="Say Great now you can login";

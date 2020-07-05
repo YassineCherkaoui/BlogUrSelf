@@ -2,6 +2,24 @@
 //include config
 require_once('../includes/config.php');
 
+//if not logged in redirect to login page
+if (!$user->is_logged_in()) {
+	header('Location: login.php');
+}
+
+//show message from add / edit page
+if (isset($_GET['deluser'])) {
+
+	//if user id is 1 ignore
+	if ($_GET['deluser'] != '1') {
+
+		$stmt = $db->prepare('DELETE FROM blog_members WHERE memberID = :memberID');
+		$stmt->execute(array(':memberID' => $_GET['deluser']));
+
+		header('Location: users.php?action=deleted');
+		exit;
+	}
+}
 
 ?>
 <!doctype html>
@@ -17,13 +35,18 @@ require_once('../includes/config.php');
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<title>Hello, world!</title>
+	<title>Admin - Users</title>
 	<link rel="stylesheet" href="../style/js/js.js">
 	<link rel="stylesheet" href="../style/css/admin.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-	
+	<script language="JavaScript" type="text/javascript">
+		function deluser(id, title) {
+			if (confirm("Are you sure you want to delete '" + title + "'")) {
+				window.location.href = 'users.php?deluser=' + id;
+			}
+		}
+	</script>
 </head>
 
 <body>
@@ -38,10 +61,10 @@ require_once('../includes/config.php');
 	</div>
 	<div class="sidebar">
 		<ul>
-			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Posts</span></a></li>
+			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
 			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
-			<li><a href="../view"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
-			<li><a href="category.php"><i class="fas fa-envelope-square"></i><span>Category</span></a></li>
+			<li><a href="#"><i class="fa fa-calendar"></i><span>Calendar</span></a></li>
+			<li><a href="#"><i class="fas fa-envelope-square"></i><span>Messages</span></a></li>
 			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
 		</ul>
 	</div>
@@ -49,42 +72,42 @@ require_once('../includes/config.php');
 	<!-- Content -->
 	<div class="main">
 		<div class="">
-		
+			<?php
+			//show message from add / edit page
+			if (isset($_GET['action'])) {
+				echo '<h3>User ' . $_GET['action'] . '.</h3>';
+			}
+			?>
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Name</th>
+						<th>#</th>
+						<th>Username</th>
 						<th>Email</th>
+						<th>Type</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-
-
-				$query = "SELECT * from author ";
-			  	$stmt = $db->prepare($query);
-			  	$stmt->execute();
-        		$result = $stmt->get_result();
-
-
-
 					try {
 
-						while ($row = $result->fetch_assoc()) {
+						$stmt = $db->query('SELECT memberID, username, email, type FROM blog_members ORDER BY username');
+						while ($row = $stmt->fetch()) {
 
 							echo '<tr>';
-							echo '<th>' . $row['author_id'] . '</th>';
-                            echo '<td>' . $row['username'] . '</td>';
-                            echo '<td>' . $row['email'] . '</td>';
+							echo '<th>' . $row['memberID'] . '</th>';
+							echo '<td>' . $row['username'] . '</td>';
+							echo '<td>' . $row['email'] . '</td>';
+							echo '<td>' . $row['type'] . '</td>';
 					?>
 
 							<td>
-								<a class="btn btn-primary" href="../view/blogger.php?id=<?= $row['author_id']; ?>" role="button">Veiw profile</a>
-								<a class="btn btn-primary" href="admin-back.php?authorId=<?= $row['author_id']; ?>">Delete</a>
+								<a class="btn btn-primary" href="edit-user.php?id=<?php echo $row['memberID']; ?>" role="button">Edit</a>
+								<?php if ($row['memberID'] != 1) { ?>
+									<a class="btn btn-primary" href="javascript:delpost('<?php echo $row['memberID']; ?>','<?php echo $row['username']; ?>')">Delete</a>
+								<?php } ?>
 							</td>
-
 					<?php
 							echo '</tr>';
 						}
@@ -96,7 +119,9 @@ require_once('../includes/config.php');
 				</tbody>
 			</table>
 		</div>
-		
+		<a href="add-user.php" class="btn btn-info btn-lg">
+			<span class="glyphicon glyphicon-plus-sign"></span> Add User
+		</a>
 	</div>
 
 

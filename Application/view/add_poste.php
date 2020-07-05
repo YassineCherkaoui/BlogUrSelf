@@ -1,133 +1,390 @@
-<?php //include config
-require_once('../includes/config.php');
+<?php
 
-//if not logged in redirect to login page
-if (!$user->is_logged_in()) {
-	header('Location: login.php');
-}
+require('../includes/config.php');
+
+$queryC= "SELECT * FROM category";
+$stmtC =$db->prepare($queryC);
+$stmtC->execute();
+$resultC= $stmtC->get_result();
+
 ?>
-<html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
-		rel="stylesheet">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<title>Hello, world!</title>
-	<link rel="stylesheet" href="../style/css/addpost.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 
 <body>
-	
-	<div class="row">
-		<div class="col-md-12">
-			<?php
 
-			//if form has been submitted process it
-			if (isset($_POST['submit'])) {
 
-				$_POST = array_map('stripslashes', $_POST);
+	<div class="main">
 
-				//collect form data
-				extract($_POST);
 
-				//very basic validation
-				if ($postTitle == '') {
-					$error[] = 'Please enter the title.';
-				}
 
-				if ($postDesc == '') {
-					$error[] = 'Please enter the description.';
-				}
 
-				if ($postCont == '') {
-					$error[] = 'Please enter the content.';
-				}
 
-				if (!isset($error)) {
+		<form action="../controller/add-poste-back.php" method="POST" enctype="multipart/form-data">
 
-					try {
+			<div>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">title</label>
+					<input type="text" name="posteTitle" class="form-control golobalstyle" id="exampleFormControlInput1"
+						placeholder="">
+				</div>
 
-						//insert into database
-						$stmt = $db->prepare('INSERT INTO blog_posts (postTitle,postDesc,postCont,postDate) VALUES (:postTitle, :postDesc, :postCont, :postDate)');
-						$stmt->execute(array(
-							':postTitle' => $postTitle,
-							':postDesc' => $postDesc,
-							':postCont' => $postCont,
-							':postDate' => date('Y-m-d H:i:s')
-						));
 
-						//redirect to index page
-						header('Location: index.php?action=added');
-						exit;
-					} catch (PDOException $e) {
-						echo $e->getMessage();
+				<div class="form-group">
+					<label for="exampleFormControlSelect1">catigory</label>
+					<select name="category" class="form-control golobalstyle" id="exampleFormControlSelect1">
+
+
+						<?php
+		
+
+					while ($rowC = $resultC->fetch_assoc()) { ?>
+						<option><?= $rowC['name']; ?> </option>
+
+
+
+						<?php
 					}
-				}
-			}
 
-			//check for any errors
-			if (isset($error)) {
-				foreach ($error as $error) {
-					echo '<p class="error">' . $error . '</p>';
-				}
-			}
-			?>
+					?>
 
-			<form action="" method="post">
-				<h1> Add Post </h1>
+					</select>
 
-				<input type="hidden" name="size" value="1000000">
-  	<div>
-  	  <input type="file" name="image">
-  	</div>
-  	<div>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlTextarea1">description</label>
+					<textarea name="descreption" class="form-control golobalstyle" id="exampleFormControlTextarea1"
+						rows="3"></textarea>
+				</div>
 
-				<fieldset>
+				<div class="form-group">
+					<label for="exampleInputFile">poste image</label>
+					<input type="file" name="poste_img" class="form-control-file golobalstyle" id="exampleInputFile"
+						aria-describedby="fileHelp">
 
-					<legend><span class="number">1</span> Title</legend>
+				</div>
+				<!--- call editor -->
+				<div id="editor_panel"></div>
+				<textarea name="posteForm" id="editor_area">
 
-					<input type="text" id="name" name='postTitle' value='<?php if (isset($error)) {
-																				echo $_POST['postTitle'];
-																			} ?>'>
+	 </textarea>
 
-					<legend><span class="number">2</span> Description</legend>
+				<button type="submit" name="go">go</button>
 
-					<textarea name='postDesc' cols='60' rows='10'><?php if (isset($error)) {
-																		echo $_POST['postDesc'];
-																	} ?></textarea>
+		</form>
 
-					<legend><span class="number">3</span> Content</legend>
 
-					<textarea name='postCont' cols='60' rows='10'><?php if (isset($error)) {
-																		echo $_POST['postCont'];
-																	} ?></textarea>
 
-					<hr>
-					<button type="submit" name='submit'>Poster</button>
 
-			</form>
-		</div>
+
 	</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-	</script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-	</script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-	</script>
+	</div>
+
+	<script src="texteditor.js"></script>
+
+
+	<style>
+		/* Demo css after plugin css */
+
+		/* = ICONS
+------------------- */
+		@import url('https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css');
+
+
+		/* = PLUGIN
+------------------- */
+		pre {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			outline: 0;
+			font-weight: inherit;
+			font-style: inherit;
+			font-size: 100%;
+			font-family: inherit;
+			vertical-align: baseline;
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap;
+			white-space: -pre-wrap;
+			white-space: -o-pre-wrap;
+			word-wrap: break-word;
+		}
+
+		#toolBar2 {
+			background: #2c3e50;
+			padding-left: 5px;
+		}
+
+		#thisForm {
+			margin: 5px 5px 5px 5px;
+			display: block;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			border: 0;
+		}
+
+		.intLink {
+			cursor: pointer;
+			color: #ecf0f1;
+			text-decoration: none;
+			margin: 6px 2px;
+			padding: 2px 5px;
+			display: inline-block;
+			outline: none;
+		}
+
+		#toolBar2 select {
+			font-size: 13px;
+			font-weight: bold;
+			border: 0;
+			width: 22px;
+			height: 30px;
+			color: #000000;
+			background: #FFF;
+			margin-top: 2px;
+		}
+
+		#textBox {
+			min-height: 200px;
+			border: 0;
+			padding: 3px;
+			overflow: auto;
+			background: #FFF;
+			border: 2px solid #BDC3C7;
+			/* border-left:0;
+  border-right:0; */
+		}
+
+		#textBox:focus {
+			border: 2px solid #BDC3C7;
+			/* border-left: 0;
+  border-right: 0; */
+			outline: none;
+		}
+
+		#textBox #sourceText {
+			margin: 0;
+			padding: 5px;
+			background: #FFF;
+			color: #4B4B4B;
+		}
+
+		#editMode {
+			background: #E74C3C;
+			padding: 5px 10px;
+			display: inline-block;
+			color: #ECF0F1;
+		}
+
+		#editMode label {
+			cursor: pointer;
+		}
+
+		input[type=checkbox] {
+			display: none;
+			outline: none;
+		}
+
+		input[type=checkbox]:checked+label {
+			background: #575757;
+			color: #FCFDFF;
+			text-shadow: 0 1px 1px #303030;
+		}
+
+		input[type=checkbox]:checked+label .handle {
+			margin-left: 45px;
+		}
+
+		label.custom-select {
+			position: relative;
+			display: inline-block;
+		}
+
+		.custom-select select {
+			display: inline-block;
+			padding: 4px 3px 3px 5px;
+			margin: 0;
+			font: inherit;
+			outline: none;
+			line-height: 1.2;
+			-webkit-appearance: none;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+		}
+
+		@media screen and (-webkit-min-device-pixel-ratio:0) {
+			.custom-select select {
+				padding-right: 10px;
+			}
+		}
+
+
+		.custom-select:after {
+			font-family: FontAwesome;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			font-size: 14px;
+			line-height: 30px;
+			padding: 0 7px;
+			background: #2c3e50;
+			height: 30px;
+			margin-right: 0;
+			margin-top: 2px;
+			color: #ecf0f1;
+			pointer-events: none;
+		}
+
+
+		.fonthd:after {
+			content: "\f040";
+		}
+
+		.fontFam:after {
+			content: "\f034";
+		}
+
+		.fontSi:after {
+			content: "\f035";
+		}
+
+		.fontCol:after {
+			content: "\f031";
+		}
+
+		.fontBck:after {
+			content: "\f043";
+		}
+
+
+		.fonthd:hover:after,
+		.fontFam:hover:after,
+		.fontSi:hover:after,
+		.fontCol:hover:after,
+		.fontBck:hover:after,
+		.send-btn:hover,
+		.intLink:hover {
+			color: #1AC0F5;
+			cursor: pointer;
+			-webkit-transition: background 1s ease;
+			-moz-transition: background 1s ease;
+			-o-transition: background 1s ease;
+			transition: background 1s ease;
+		}
+
+		.no-pointer-events .custom-select:after {
+			content: none;
+		}
+
+
+
+
+		/* = DEMO MODE
+------------------*/
+		body {
+			background: #fff;
+		}
+
+		#thisForm {
+			box-shadow: 0 5px 25px 10px #fff;
+		}
+
+		#textBox {
+			height: 500px;
+		}
+
+		#editor_area {
+			width: 98.5%;
+			min-height: 200px;
+			margin: 2px
+		}
+
+		.main {
+			width: 800px;
+			margin: 0 auto;
+		}
+
+		.head-title {
+			text-align: center;
+			color: #FFFFFF;
+			text-shadow: 0 4px 3px #6D6D6D;
+		}
+
+		.head-title a {
+			padding: 5px 10px;
+			background: #FFF;
+			text-decoration: none;
+			color: #333;
+			transition: color 1s ease;
+		}
+
+		.head-title a:hover {
+			color: #f55;
+			transition: color 1s ease;
+		}
+
+		.code {
+			background: #333;
+			padding: 10px;
+			border: 5px solid #1CD9E0;
+			color: #13DCE4;
+		}
+
+		.body-text {
+			color: white;
+		}
+
+		@media screen and (max-width: 480px; ) {
+			.main {
+				width: 100%;
+				margin: 30px auto;
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/* ----------------- */
+
+
+		.form-control {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			margin-top: 6px;
+			margin-bottom: 16px;
+			resize: vertical;
+
+		}
+	</style>
+
 </body>
 
 </html>

@@ -2,20 +2,6 @@
 //include config
 require_once('../includes/config.php');
 
-//if not logged in redirect to login page
-if (!$user->is_logged_in()) {
-	header('Location: login.php');
-}
-
-//show message from add / edit page
-if (isset($_GET['delpost'])) {
-
-	$stmt = $db->prepare('DELETE FROM blog_posts WHERE postID = :postID');
-	$stmt->execute(array(':postID' => $_GET['delpost']));
-
-	header('Location: index.php?action=deleted');
-	exit;
-}
 
 ?>
 <!doctype html>
@@ -37,14 +23,7 @@ if (isset($_GET['delpost'])) {
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-	<scrip>
-		<script language="JavaScript" type="text/javascript">
-			function delpost(id, title) {
-				if (confirm("Are you sure you want to delete '" + title + "'")) {
-					window.location.href = 'index.php?delpost=' + id;
-				}
-			}
-		</script>
+	
 </head>
 
 <body>
@@ -59,10 +38,10 @@ if (isset($_GET['delpost'])) {
 	</div>
 	<div class="sidebar">
 		<ul>
-			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
+			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Posts</span></a></li>
 			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
-			<li><a href="../"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
-			<li><a href="#"><i class="fas fa-envelope-square"></i><span>Messages</span></a></li>
+			<li><a href="../view"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
+			<li><a href="category.php"><i class="fas fa-envelope-square"></i><span>category</span></a></li>
 			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
 		</ul>
 	</div>
@@ -70,16 +49,11 @@ if (isset($_GET['delpost'])) {
 	<!-- Content -->
 	<div class="main">
 		<div class="">
-			<?php
-			//show message from add / edit page
-			if (isset($_GET['action'])) {
-				echo '<h3>Post ' . $_GET['action'] . '.</h3>';
-			}
-			?>
+		
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>#</th>
+						<th>Category</th>
 						<th>Title</th>
 						<th>Date</th>
 						<th>Action</th>
@@ -87,20 +61,28 @@ if (isset($_GET['delpost'])) {
 				</thead>
 				<tbody>
 					<?php
+
+
+				$query = "SELECT * from posts ";
+			  	$stmt = $db->prepare($query);
+			  	$stmt->execute();
+        		$result = $stmt->get_result();
+
+
+
 					try {
 
-						$stmt = $db->query('SELECT postID, postTitle, postDate FROM blog_posts ORDER BY postID DESC');
-						while ($row = $stmt->fetch()) {
+						while ($row = $result->fetch_assoc()) {
 
 							echo '<tr>';
-							echo '<th>' . $row['postID'] . '</th>';
+							echo '<th>' . $row['category'] . '</th>';
 							echo '<td>' . $row['postTitle'] . '</td>';
 							echo '<td>' . date('jS M Y', strtotime($row['postDate'])) . '</td>';
 					?>
 
 							<td>
-								<a class="btn btn-primary" href="edit-post.php?id=<?php echo $row['postID']; ?>" role="button">Edit</a>
-								<a class="btn btn-primary" href="javascript:delpost('<?php echo $row['postID']; ?>','<?php echo $row['postTitle']; ?>')">Delete</a>
+								<a class="btn btn-primary" href="../view/viewpost.php?id=<?= $row['posteID']; ?>" role="button">Veiw</a>
+								<a class="btn btn-primary" href="admin-back.php?postId=<?= $row['posteID']; ?>">Delete</a>
 							</td>
 
 					<?php
@@ -114,9 +96,8 @@ if (isset($_GET['delpost'])) {
 				</tbody>
 			</table>
 		</div>
-		<a href="add-post.php" class="btn btn-info btn-lg">
-			<span class="glyphicon glyphicon-plus-sign"></span> Add Blog
-		</a>
+		
+		
 	</div>
 
 

@@ -41,7 +41,7 @@ require_once('../includes/config.php');
 			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Posts</span></a></li>
 			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
 			<li><a href="../view"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
-			<li><a href="category.php"><i class="fas fa-envelope-square"></i><span>Category</span></a></li>
+			<li><a href="category.php"><i class="fas fa-envelope-square"></i><span>category</span></a></li>
 			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
 		</ul>
 	</div>
@@ -53,9 +53,8 @@ require_once('../includes/config.php');
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>Id Category</th>
 						<th>Name</th>
-						<th>Email</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -63,7 +62,7 @@ require_once('../includes/config.php');
 					<?php
 
 
-				$query = "SELECT * from author ";
+				$query = "SELECT * from category ";
 			  	$stmt = $db->prepare($query);
 			  	$stmt->execute();
         		$result = $stmt->get_result();
@@ -75,14 +74,12 @@ require_once('../includes/config.php');
 						while ($row = $result->fetch_assoc()) {
 
 							echo '<tr>';
-							echo '<th>' . $row['author_id'] . '</th>';
-                            echo '<td>' . $row['username'] . '</td>';
-                            echo '<td>' . $row['email'] . '</td>';
+							echo '<th>' . $row['id'] . '</th>';
+							echo '<td>' . $row['name'] . '</td>';
 					?>
 
 							<td>
-								<a class="btn btn-primary" href="../view/blogger.php?id=<?= $row['author_id']; ?>" role="button">Veiw profile</a>
-								<a class="btn btn-primary" href="admin-back.php?authorId=<?= $row['author_id']; ?>">Delete</a>
+								<a class="btn btn-primary" href="admin-back.php?categoryId=<?= $row['id']; ?>">Delete</a>
 							</td>
 
 					<?php
@@ -96,8 +93,15 @@ require_once('../includes/config.php');
 				</tbody>
 			</table>
 		</div>
+        <a href="add-post.php" class="btn btn-info btn-lg">
+			<span class="glyphicon glyphicon-plus-sign"></span> Add Category
+		</a>
 		
 	</div>
+
+    
+
+
 
 
 

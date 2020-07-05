@@ -1,4 +1,7 @@
-<?php require('../includes/config.php'); ?>
+<?php require('../includes/config.php');
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +26,7 @@
     rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
   <!-- Custom styles for this template -->
-  <link href="../style/home/css/clean-blog.min.css" rel="stylesheet">
+  <link href="../style/home/css/clean-blog.css" rel="stylesheet">
 
 </head>
 
@@ -76,7 +79,7 @@
 
 
   <div>
-  
+
   </div>
 
   <!-- Main Content -->
@@ -88,69 +91,91 @@
             <h2>Recent Posts</h2>
           </div>
         </div>
-        <!-- <div class="row">
-
-
+        <div class="row">
 
           <?php
+        
+        
 
-          // $vol = new Vol();
-          // $res = $vol -> vol_show_id($id);
-          // $row = $res->fetch_assoc();
+        $query = "SELECT * from posts ";
+			  $stmt = $db->prepare($query);
+			  $stmt->execute();
+        $result = $stmt->get_result();
+       
+
+        while ( $row = $result->fetch_assoc()) {
+
+          $author_id = $row['author_id'];
+
+
+          $query2= "SELECT * FROM author WHERE author_id=?";
+          $stmt =$db->prepare($query2);
+          $stmt->bind_param("i",$author_id);
+          $stmt->execute();
+          $result2= $stmt->get_result();
+          $row3 = $result2->fetch_assoc();
 
 
 
+         
 
-			    try {
-
-				  $stmt = $db->query('SELECT * FROM blog_posts ORDER BY postDate DESC ');
-				  while($row = $stmt->fetch()){
-             $id_author = $row['id_author'];
-
-            $stmt2 = $db->query("SELECT * FROM blog_members where memberID= $id_author ");
-            $row2 = $stmt2->fetch()
-                 ?>
+          
+          
+          
+          ?>
 
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a href="viewpost.php?id=<?= $row['postID']; ?>"><img
-                  src="https://i.ytimg.com/vi/lZw5kqcyEgo/maxresdefault.jpg" alt="Image" class="img-fluid rounded"></a>
+              <a name="posteID" href="viewpost.php?id=<?= $row['posteID']; ?>"><img style="width: 364px;vertical-align: middle;border-style: none;height: 240px;" src="<?= $row['postImg']; ?>"></a>
               <div class="excerpt">
-                <span class="post-category text-white bg-secondary mb-3"><?= $row['id_category']; ?></span>
+                <span class="post-category text-white bg-secondary mb-3"><?= $row['category']; ?></span>
 
-                <h2><a href="viewpost.php?id=<?= $row['postID']; ?>"><?= $row['postTitle']; ?></a></h2>
+                <h2><a name="posteID" href="viewpost.php?id=<?= $row['posteID']; ?>"><?= $row['postTitle']; ?></a></h2>
                 <div class="post-meta align-items-center text-left clearfix">
 
-                
 
 
-                  <figure class="author-figure mb-0 mr-3 float-left"><img src=""
-                      alt="Image"  id="author-img" class="img-fluid"></figure>
-                  <span class="d-inline-block mt-1">By <a href="#"><?= $row2['username']; ?></a></span>
-                  <span>&nbsp;-&nbsp; <?= $row['postDate']; ?></span>
+
+                  <figure class="author-figure mb-0 mr-3 float-left"><img style="max-width: 100%;height: 50px;width: 50px;border-radius: 57%;" src="<?= $row3["author_img"]; ?>" alt="Image" id="author-img" class="img-fluid"></figure>
+                  <span class="d-inline-block mt-1">By <a href="blogger.php?id=<?= $row3['author_id']; ?>"><?= $row3["username"]; ?></a></span>
+                  <span>&nbsp;-&nbsp; <?= date('jS M Y', strtotime($row['postDate'])); ?></span>
                 </div>
 
-                <p><?= $row['postDesc']; ?></p>
-                <p><a href="#">Read More</a></p>
+
+
+                <!-- <p><?= $row['postDesc']; ?></p> -->
+                <!-- <p><a href="#">Read More</a></p> -->
               </div>
             </div>
           </div>
 
 
 
-          <?php }
-      
-            } catch(PDOException $e) {
-                echo $e->getMessage();
-              
-              }
-          ?>
+          <?php } ?>
 
 
 
 
 
-        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
 
       </div>
     </div>
@@ -159,7 +184,7 @@
 
 
 
-  <div class="site-section bg-lightx">
+  <!-- <div class="site-section bg-lightx">
     <div class="container">
       <div class="row justify-content-center text-center">
         <div class="col-md-5">
@@ -175,14 +200,14 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <br>
 
 
 
 
   <!-- Footer -->
-  <footer>
+  <!-- <footer>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -216,15 +241,20 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="../style/style/style/vendor/jquery/jquery.min.js"></script>
-  <script src="style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="../style/js/clean-blog.min.js"></script>
+  <!-- <script src="../style/js/clean-blog.min.js"></script> -->
 
 </body>
+
+
+<style>
+
+</style>
 
 </html>

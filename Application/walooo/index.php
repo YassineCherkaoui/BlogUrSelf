@@ -2,6 +2,20 @@
 //include config
 require_once('../includes/config.php');
 
+//if not logged in redirect to login page
+if (!$user->is_logged_in()) {
+	header('Location: login.php');
+}
+
+//show message from add / edit page
+if (isset($_GET['delpost'])) {
+
+	$stmt = $db->prepare('DELETE FROM blog_posts WHERE postID = :postID');
+	$stmt->execute(array(':postID' => $_GET['delpost']));
+
+	header('Location: index.php?action=deleted');
+	exit;
+}
 
 ?>
 <!doctype html>
@@ -23,7 +37,14 @@ require_once('../includes/config.php');
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-	
+	<scrip>
+		<script language="JavaScript" type="text/javascript">
+			function delpost(id, title) {
+				if (confirm("Are you sure you want to delete '" + title + "'")) {
+					window.location.href = 'index.php?delpost=' + id;
+				}
+			}
+		</script>
 </head>
 
 <body>
@@ -38,10 +59,10 @@ require_once('../includes/config.php');
 	</div>
 	<div class="sidebar">
 		<ul>
-			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Posts</span></a></li>
+			<li><a href="index.php"><i class="fa fa-desktop"></i><span>Desktop</span></a></li>
 			<li><a href="users.php"><i class="fa fa-users"></i><span>Users</span></a></li>
-			<li><a href="../view"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
-			<li><a href="category.php"><i class="fas fa-envelope-square"></i><span>Category</span></a></li>
+			<li><a href="../"><i class="fa fa-blog"></i><span>View Blog</span></a></li>
+			<li><a href="#"><i class="fas fa-envelope-square"></i><span>Messages</span></a></li>
 			<li><a href="logout.php"><i class="fas fa-sign-out-alt"></i><span>LogOut</span></a></li>
 		</ul>
 	</div>
@@ -49,40 +70,37 @@ require_once('../includes/config.php');
 	<!-- Content -->
 	<div class="main">
 		<div class="">
-		
+			<?php
+			//show message from add / edit page
+			if (isset($_GET['action'])) {
+				echo '<h3>Post ' . $_GET['action'] . '.</h3>';
+			}
+			?>
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th>ID</th>
-						<th>Name</th>
-						<th>Email</th>
+						<th>#</th>
+						<th>Title</th>
+						<th>Date</th>
 						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php
-
-
-				$query = "SELECT * from author ";
-			  	$stmt = $db->prepare($query);
-			  	$stmt->execute();
-        		$result = $stmt->get_result();
-
-
-
 					try {
 
-						while ($row = $result->fetch_assoc()) {
+						$stmt = $db->query('SELECT postID, postTitle, postDate FROM blog_posts ORDER BY postID DESC');
+						while ($row = $stmt->fetch()) {
 
 							echo '<tr>';
-							echo '<th>' . $row['author_id'] . '</th>';
-                            echo '<td>' . $row['username'] . '</td>';
-                            echo '<td>' . $row['email'] . '</td>';
+							echo '<th>' . $row['postID'] . '</th>';
+							echo '<td>' . $row['postTitle'] . '</td>';
+							echo '<td>' . date('jS M Y', strtotime($row['postDate'])) . '</td>';
 					?>
 
 							<td>
-								<a class="btn btn-primary" href="../view/blogger.php?id=<?= $row['author_id']; ?>" role="button">Veiw profile</a>
-								<a class="btn btn-primary" href="admin-back.php?authorId=<?= $row['author_id']; ?>">Delete</a>
+								<a class="btn btn-primary" href="edit-post.php?id=<?php echo $row['postID']; ?>" role="button">Edit</a>
+								<a class="btn btn-primary" href="javascript:delpost('<?php echo $row['postID']; ?>','<?php echo $row['postTitle']; ?>')">Delete</a>
 							</td>
 
 					<?php
@@ -96,7 +114,9 @@ require_once('../includes/config.php');
 				</tbody>
 			</table>
 		</div>
-		
+		<a href="add-post.php" class="btn btn-info btn-lg">
+			<span class="glyphicon glyphicon-plus-sign"></span> Add Blog
+		</a>
 	</div>
 
 
