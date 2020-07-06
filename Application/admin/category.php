@@ -93,7 +93,7 @@ require_once('../includes/config.php');
 				</tbody>
 			</table>
 		</div>
-        <a href="add-post.php" class="btn btn-info btn-lg">
+        <a href="add-ctg.php" class="btn btn-info btn-lg">
 			<span class="glyphicon glyphicon-plus-sign"></span> Add Category
 		</a>
 		

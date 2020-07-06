@@ -51,11 +51,36 @@ session_start();
             <a class="nav-link" href="about.php">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.php">Contact</a>
+            <a class="nav-link" href="contact.php">dd</a>
           </li>
+
+          <?php
+
+          if (isset($_SESSION['username'])){ ?>
+
+
+
+
+
           <li class="nav-item">
-            <a class="btn" href="#" style="color: #FFC273;">Start Writing</a>
+            <a class="btn" href="blogger_profile.php" style="color: #FFC273;">
+              <?= $_SESSION["username"]; ?></a>
           </li>
+
+          <?php
+          }else { ?>
+
+          <li class="nav-item">
+            <a class="btn" href="login.php" style="color: #FFC273;">Start Writing</a>
+          </li>
+
+          <?php   }
+
+          
+          
+          
+          ?>
+
         </ul>
       </div>
     </div>
@@ -126,7 +151,9 @@ session_start();
 
           <div class="col-lg-4 mb-4">
             <div class="entry2">
-              <a name="posteID" href="viewpost.php?id=<?= $row['posteID']; ?>"><img style="width: 364px;vertical-align: middle;border-style: none;height: 240px;" src="<?= $row['postImg']; ?>"></a>
+              <a name="posteID" href="viewpost.php?id=<?= $row['posteID']; ?>"><img
+                  style="width: 364px;vertical-align: middle;border-style: none;height: 240px;"
+                  src="<?= $row['postImg']; ?>"></a>
               <div class="excerpt">
                 <span class="post-category text-white bg-secondary mb-3"><?= $row['category']; ?></span>
 
@@ -136,8 +163,11 @@ session_start();
 
 
 
-                  <figure class="author-figure mb-0 mr-3 float-left"><img style="max-width: 100%;height: 50px;width: 50px;border-radius: 57%;" src="<?= $row3["author_img"]; ?>" alt="Image" id="author-img" class="img-fluid"></figure>
-                  <span class="d-inline-block mt-1">By <a href="blogger.php?id=<?= $row3['author_id']; ?>"><?= $row3["username"]; ?></a></span>
+                  <figure class="author-figure mb-0 mr-3 float-left"><img
+                      style="max-width: 100%;height: 50px;width: 50px;border-radius: 57%;"
+                      src="<?= $row3["author_img"]; ?>" alt="Image" id="author-img" class="img-fluid"></figure>
+                  <span class="d-inline-block mt-1">By <a
+                      href="blogger.php?id=<?= $row3['author_id']; ?>"><?= $row3["username"]; ?></a></span>
                   <span>&nbsp;-&nbsp; <?= date('jS M Y', strtotime($row['postDate'])); ?></span>
                 </div>
 
