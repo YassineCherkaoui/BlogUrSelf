@@ -1,13 +1,66 @@
 <?php require('../includes/config.php');
 
-$poste_id = $_GET["id"];
 
-$query2= "SELECT * FROM posts WHERE posteID=?";
-$stmt =$db->prepare($query2);
-$stmt->bind_param("i",$poste_id);
-$stmt->execute();
-$result2= $stmt->get_result();
-$row3 = $result2->fetch_assoc();
+if (isset($_GET["id"]) && !empty($_GET["id"])) {
+	$poste_id = $_GET["id"];
+
+	$query2= "SELECT * FROM posts WHERE posteID=?";
+	$stmt =$db->prepare($query2);
+	$stmt->bind_param("i",$poste_id);
+	$stmt->execute();
+	$result2= $stmt->get_result();
+	$row3 = $result2->fetch_assoc();
+
+	$views = $row3["views"] + 1;
+
+	$count = "UPDATE posts SET views=? WHERE posteID=?";
+	$stmt =$db->prepare($count);
+	$stmt->bind_param("ii",$views,$poste_id);
+	$stmt->execute();
+	
+
+
+
+}
+else{
+	$poste_id = null;
+	header('location: index.php');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -130,8 +183,9 @@ $row3 = $result2->fetch_assoc();
 
 					<!-- Date/Time -->
 
-					
+
 					<p>Posted on <?= date('jS M Y', strtotime($row3['postDate'])) ?></p>
+					<p><?=  $views ?> Views</p>
 
 					<hr>
 
@@ -147,26 +201,31 @@ $row3 = $result2->fetch_assoc();
 					<hr>
 
 					<!-- Comments Form -->
-					<!-- <div class="card my-4">
-          <h5 class="card-header">Leave a Comment:</h5>
-          <div class="card-body">
-            <form>
-              <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
-        </div> -->
+					<div class="card my-4">
+						<h5 class="card-header">Leave a Comment:</h5>
+						<div class="card-body">
+						<form method="POST" id="comment_form">
+								<input type="hidden" name="postID" id="postID" value="<?= $poste_id ?>">
+								<div class="form-group">
+									<textarea name="comment_content" class="form-control" rows="3" id="comment_content"></textarea>
+								</div>
+								<input type="hidden" name="comment_id" id="comment_id" value="0" />
+								<button name="submit" type="submit" id="submit"
+									class="btn btn-primary">Submit</button>
+								
+							</form>
+							<span>you must login to continue</span>
+
+						</div>
+						<span id="comment_message"></span>
+					</div>
 
 					<!-- Single Comment -->
-					<!-- <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-        </div> -->
+					<div id="display_comment"></div>
+
+					
+
+
 
 					<!-- Comment with nested comments -->
 					<!-- <div class="media mb-4">
@@ -216,8 +275,8 @@ $row3 = $result2->fetch_assoc();
 
 								<div class="row">
 									<div class="col col-lg-3">
-										<img style="margin: 7% 0 7% 0;height: 78px;width: 84px;"  src="<?= $row4['postImg']; ?>"
-											alt="" srcset="">
+										<img style="margin: 7% 0 7% 0;height: 78px;width: 84px;"
+											src="<?= $row4['postImg']; ?>" alt="" srcset="">
 									</div>
 									<div class="col -md-auto">
 										<p><a
@@ -269,22 +328,72 @@ $row3 = $result2->fetch_assoc();
 
 	</div>
 
+	
 
 
 
 
 
-	<script src="../style/style/style/vendor/jquery/jquery.min.js"></script>
+
+	<!-- <script src="../style/style/style/vendor/jquery/jquery.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="../style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="../style/js/clean-blog.min.js"></script>
 
+	<script>
+$(document).ready(function () {
+
+	$('#comment_form').on('submit', function (event) {
+		event.preventDefault();
+		var form_data = $(this).serialize();
+		$.ajax({
+			url: "../controller/comment-back.php",
+			method: "POST",
+			data: form_data,
+			dataType: "JSON",
+			success: function (data) {
+				if (data.error != '') {
+					$('#comment_form')[0].reset();
+					$('#comment_message').html(data.error);
+					$('#comment_id').val('0');
+					load_comment();
+
+				}
+			}
+		})
+	});
+
+	load_comment();
+
+	function load_comment() {
+
+		var postID = $("#postID").val();
+		$.ajax({
+			url: "../controller/fetch_comment.php",
+			method: "POST",
+			data: {
+				postID: postID
+			},
+			success: function (data) {
+				$('#display_comment').html(data);
+			}
+		})
+	}
+
+
+
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
 </body>
-
-<style>
-
-
-</style>
-
-
-
 </html>
