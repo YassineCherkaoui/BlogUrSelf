@@ -30,49 +30,6 @@ else{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 
 
@@ -89,20 +46,15 @@ else{
 		<meta name="author" content="">
 
 		<title>blogUeSelf</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-		<!-- Bootstrap core CSS -->
-		<link href="../style/home/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Custom fonts for this template -->
-		<link href="../style/home/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-		<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
-			type='text/css'>
-		<link
-			href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-			rel='stylesheet' type='text/css'>
 		<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-		<!-- Custom styles for this template -->
-		<link href="../style/home/css/clean-blog.css" rel="stylesheet">
+		<link href="../css/clean-blog.css" rel="stylesheet">
+
+
+
 
 	</head>
 </head>
@@ -155,7 +107,7 @@ else{
 			<div class="row">
 
 				<!-- Post Content Column -->
-				<div class="col-lg-8">
+				<div class="postCont col-lg-8">
 
 					<!-- Title -->
 					<h1 class="mt-4"><?= $row3['postTitle']; ?></h1>
@@ -204,15 +156,15 @@ else{
 					<div class="card my-4">
 						<h5 class="card-header">Leave a Comment:</h5>
 						<div class="card-body">
-						<form method="POST" id="comment_form">
+							<form method="POST" id="comment_form">
 								<input type="hidden" name="postID" id="postID" value="<?= $poste_id ?>">
 								<div class="form-group">
-									<textarea name="comment_content" class="form-control" rows="3" id="comment_content"></textarea>
+									<textarea name="comment_content" class="form-control" rows="3"
+										id="comment_content"></textarea>
 								</div>
 								<input type="hidden" name="comment_id" id="comment_id" value="0" />
-								<button name="submit" type="submit" id="submit"
-									class="btn btn-primary">Submit</button>
-								
+								<button name="submit" type="submit" id="submit" class="btn btn-primary">Submit</button>
+
 							</form>
 							<span>you must login to continue</span>
 
@@ -222,36 +174,6 @@ else{
 
 					<!-- Single Comment -->
 					<div id="display_comment"></div>
-
-					
-
-
-
-					<!-- Comment with nested comments -->
-					<!-- <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
-            </div>
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-              </div>
-            </div>
-
-          </div>
-        </div> -->
 
 				</div>
 
@@ -291,16 +213,7 @@ else{
 
 
 
-								<!-- <div class="row">
-									<div class="col col-lg-3">
-										<img src="https://thehackernews.com/images/-UARwrwuFISs/XvyAe8AO39I/AAAAAAAA2-c/lyk_PeWG9XUv2fOECQMBHOXhtqX4g5MwgCLcBGAsYHQ/s72-c-e100/Windows-Update.png"
-											alt="" srcset="">
-									</div>
-									<div class="col -md-auto">
-										<p><a href="">Microsoft Releases Urgent Windows Update to Patch Two
-												Critical Flaws</a></p>
-									</div>
-								</div> -->
+
 							</div>
 						</div>
 
@@ -328,7 +241,67 @@ else{
 
 	</div>
 
-	
+	<!-- Site footer -->
+	<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<h6>About</h6>
+					<p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the
+						upcoming
+						programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as
+						the code
+						wants to be simple. We will help programmers build up concepts in different programming
+						languages that
+						include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+				</div>
+
+				<div class="col-xs-6 col-md-3">
+					<h6>Categories</h6>
+					<ul class="footer-links">
+						<li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+						<li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+						<li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+						<li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+						<li><a href="http://scanfcode.com/category/android/">Android</a></li>
+						<li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+					</ul>
+				</div>
+
+				<div class="col-xs-6 col-md-3">
+					<h6>Quick Links</h6>
+					<ul class="footer-links">
+						<li><a href="http://scanfcode.com/about/">About Us</a></li>
+						<li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+						<li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+						<li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+						<li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+					</ul>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-6 col-xs-12">
+					<p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
+						<a href="#">Scanfcode</a>.
+					</p>
+				</div>
+
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<ul class="social-icons">
+						<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+						<li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
 
 
 
@@ -341,59 +314,69 @@ else{
 	<script src="../style/js/clean-blog.min.js"></script>
 
 	<script>
-$(document).ready(function () {
+		$(document).ready(function () {
 
-	$('#comment_form').on('submit', function (event) {
-		event.preventDefault();
-		var form_data = $(this).serialize();
-		$.ajax({
-			url: "../controller/comment-back.php",
-			method: "POST",
-			data: form_data,
-			dataType: "JSON",
-			success: function (data) {
-				if (data.error != '') {
-					$('#comment_form')[0].reset();
-					$('#comment_message').html(data.error);
-					$('#comment_id').val('0');
-					load_comment();
+			$('#comment_form').on('submit', function (event) {
+				event.preventDefault();
+				var form_data = $(this).serialize();
+				$.ajax({
+					url: "../controller/comment-back.php",
+					method: "POST",
+					data: form_data,
+					dataType: "JSON",
+					success: function (data) {
+						if (data.error != '') {
+							$('#comment_form')[0].reset();
+							$('#comment_message').html(data.error);
+							$('#comment_id').val('0');
+							load_comment();
 
-				}
+						}
+					}
+				})
+			});
+
+			load_comment();
+
+			function load_comment() {
+
+				var postID = $("#postID").val();
+				$.ajax({
+					url: "../controller/fetch_comment.php",
+					method: "POST",
+					data: {
+						postID: postID
+					},
+					success: function (data) {
+						$('#display_comment').html(data);
+					}
+				})
 			}
-		})
-	});
-
-	load_comment();
-
-	function load_comment() {
-
-		var postID = $("#postID").val();
-		$.ajax({
-			url: "../controller/fetch_comment.php",
-			method: "POST",
-			data: {
-				postID: postID
-			},
-			success: function (data) {
-				$('#display_comment').html(data);
-			}
-		})
-	}
 
 
 
 
-});
-</script>
+		});
+	</script>
 
 
 
 
 
+<style>
 
+.postCont img{
+	max-width: 100%;
+    height: auto;
+  /* width:720px; */
+}
+
+
+</style>
 
 
 
 
 </body>
+
 </html>

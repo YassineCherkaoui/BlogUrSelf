@@ -7,10 +7,10 @@ if(ISSET($_POST['go'])){
 
     $title = $_POST['posteTitle'];
     $ctg = $_POST['category'];
-    $desc = $_POST['descreption'];
     $form = $_POST['posteForm'];
     $authorID = $_SESSION["author_id"] ;
     $date = date('Y-m-d H:i:s');
+    $view = 0;
 
     
     $photoName = time() .'-'. $_FILES['poste_img']['name'];
@@ -27,8 +27,8 @@ if(ISSET($_POST['go'])){
 
         if ($fileError == 0) {
             move_uploaded_file($_FILES['poste_img']['tmp_name'],$target);
-            $stmt =$db->prepare("INSERT INTO posts (author_id,postImg,postTitle,category,postDesc,postCont,postDate) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param('issssss', $authorID, $target, $title, $ctg, $desc,$form, $date);
+            $stmt =$db->prepare("INSERT INTO posts (author_id,postImg,postTitle,category,postCont,postDate,views) VALUES (?,?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param('isssssi', $authorID, $target, $title, $ctg, $form, $date,$view);
             $stmt->execute();
         }
         else {
