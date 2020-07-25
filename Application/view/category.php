@@ -7,6 +7,19 @@ $stmtC =$db->prepare($queryC);
 $stmtC->execute();
 $resultC= $stmtC->get_result();
 
+
+
+if (isset($_GET["category"]) && !empty($_GET["category"])) {
+	$category_name = $_GET["category"];
+
+	
+}
+else{
+	$category_name = null;
+	header('location: index.php');
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +62,7 @@ $resultC= $stmtC->get_result();
           </li>
           <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         CATEGORIES
+        Category
         </a>
        
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,7 +71,7 @@ $resultC= $stmtC->get_result();
 		
 
     while ($rowC = $resultC->fetch_assoc()) { ?>
-    <a class="dropdown-item" href="category.php?category=<?= $rowC['name']; ?>"><?= $rowC['name']; ?></a>
+    <a class="dropdown-item" href="category.php?id=<?= $rowC['id']; ?>"><?= $rowC['name']; ?></a>
 
 
 
@@ -105,10 +118,8 @@ $resultC= $stmtC->get_result();
     </div>
   </nav>
 
-  
-
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('../style/home/img/home-bg.jpg')">
+  <!-- <header class="masthead" style="background-image: url('../style/home/img/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -120,7 +131,7 @@ $resultC= $stmtC->get_result();
         </div>
       </div>
     </div>
-  </header>
+  </header> -->
 
 
 
@@ -131,10 +142,12 @@ $resultC= $stmtC->get_result();
   <!-- Main Content -->
   <div class="container">
     <div class="site-section">
-      <div class="container">
+      <div class="container" style="
+    margin-top: 18%;
+">
         <div class="row mb-5">
           <div class="col-12">
-            <h2>Recent Posts</h2>
+            <h2>Recent Posts From <?= $category_name ?></h2>
           </div>
         </div>
         <div class="row">
@@ -143,10 +156,11 @@ $resultC= $stmtC->get_result();
         
         
 
-        $query = "SELECT * from posts ";
-			  $stmt = $db->prepare($query);
-			  $stmt->execute();
-        $result = $stmt->get_result();
+            $query = "SELECT * from posts WHERE category=?";
+            $stmt =$db->prepare($query);
+            $stmt->bind_param("s",$category_name);
+			$stmt->execute();
+            $result = $stmt->get_result();
        
 
         while ( $row = $result->fetch_assoc()) {
