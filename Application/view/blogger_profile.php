@@ -191,6 +191,7 @@
                                             href="viewpost.php?id=<?= $row['posteID']; ?>"><?= $row['postTitle']; ?></a>
                                     </h2>
                                     <div class="post-meta align-items-center text-left clearfix">
+                                    <a href="edit_poste.php?id=<?= $row['posteID']; ?>">Edit Post</a>
                                     </div>
 
 
