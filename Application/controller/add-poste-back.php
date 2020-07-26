@@ -83,7 +83,7 @@ if(ISSET($_POST['edit-post'])){
             $stmt->execute();
         }
         else {
-            $_SESSION["message4"] ="try agrin";
+            $_SESSION["message4"] ="pls try agrin";
         }
         
 
