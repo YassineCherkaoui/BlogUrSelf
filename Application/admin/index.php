@@ -1,6 +1,15 @@
 <?php
 //include config
-require_once('../includes/config.php');
+// require_once('../includes/config.php');
+require('../model/post.php');
+
+session_start();
+
+if(isset($_SESSION["admininfo"])){
+
+
+
+
 
 
 ?>
@@ -63,10 +72,15 @@ require_once('../includes/config.php');
 					<?php
 
 
-				$query = "SELECT * from posts ";
-			  	$stmt = $db->prepare($query);
-			  	$stmt->execute();
-        		$result = $stmt->get_result();
+				$post = new Post();
+				$result = $post -> view_all_post();
+
+
+
+				// $query = "SELECT * from posts ";
+			  	// $stmt = $db->prepare($query);
+			  	// $stmt->execute();
+        		// $result = $stmt->get_result();
 
 
 
@@ -112,3 +126,14 @@ require_once('../includes/config.php');
 </body>
 
 </html>
+
+
+<?php
+
+}else
+{
+	header("Location: login.php");
+	exit();
+}
+
+?>

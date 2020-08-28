@@ -1,5 +1,8 @@
 <?php
- require('../includes/config.php');
+//  require('../includes/config.php');
+
+ require('../model/auther.php');
+
 
 
 if(ISSET($_POST['editUserProfile'])){
@@ -14,9 +17,13 @@ if(ISSET($_POST['editUserProfile'])){
     $insta = $_POST['insta'];
     $twit = $_POST['twit'];
 
-    $stmt =$db->prepare("UPDATE author SET username=?, email=?, author_bio=?, fb_account=?, insta_account=?, twit_account=? WHERE author_id=?");
-    $stmt->bind_param('ssssssi', $username, $email,  $bio, $fb, $insta, $twit, $id);
-    $stmt->execute();
+    $auther = new Auther();
+    $auther -> update_info2($username, $email,  $bio, $fb, $insta, $twit, $id);
+   
+
+    // $stmt =$db->prepare("UPDATE author SET username=?, email=?, author_bio=?, fb_account=?, insta_account=?, twit_account=? WHERE author_id=?");
+    // $stmt->bind_param('ssssssi', $username, $email,  $bio, $fb, $insta, $twit, $id);
+    // $stmt->execute();
 
 
     // echo print_r($_FILES['profile_img']['name']);
@@ -35,9 +42,14 @@ if(ISSET($_POST['editUserProfile'])){
 
         if ($fileError == 0) {
             move_uploaded_file($_FILES['profile_img']['tmp_name'],$target);
-            $stmt =$db->prepare("UPDATE author SET author_img=? WHERE author_id=?");
-            $stmt->bind_param('si', $target, $id);
-            $stmt->execute();
+
+            // $stmt =$db->prepare("UPDATE author SET author_img=? WHERE author_id=?");
+            // $stmt->bind_param('si', $target, $id);
+            // $stmt->execute();
+
+            $auther = new Auther();
+            $auther -> update_info($target, $id);
+           
         }
         else {
             $_SESSION["message3"] ="try agrin";
@@ -89,7 +101,7 @@ if(ISSET($_POST['editUserProfile'])){
 
 
 
-echo "hhhh";
+
 
 
 ?>

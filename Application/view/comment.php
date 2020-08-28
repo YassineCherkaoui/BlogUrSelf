@@ -1,5 +1,7 @@
 <?php
- require('../includes/config.php');
+
+require_once('../model/comment.php');
+
  session_start();
 
  $error = "";
@@ -21,9 +23,12 @@ else
 if($error == '')
 {
    
-    $stmt =$db->prepare("INSERT INTO comment (author_id,msg,post_id,date) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param('isis', $authorID, $comment, $postID, $date);
-    $stmt->execute();
+    // $stmt =$db->prepare("INSERT INTO comment (author_id,msg,post_id,date) VALUES (?, ?, ?, ?)");
+    // $stmt->bind_param('isis', $authorID, $comment, $postID, $date);
+    // $stmt->execute();
+
+    $comment = new Comment();
+    $comment ->add_comment($authorID, $comment, $postID, $date);
 
     $error = '<label class="text-success">Comment Added</label>';
 

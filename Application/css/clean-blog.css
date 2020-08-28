@@ -653,3 +653,20 @@ h5,
     font-weight: 600
   }
 }
+
+
+/* -------------------custm style -------------- */
+
+#card-header{
+  font-size: 18px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e6e6e6;
+
+}
+#alink{
+  line-height: 1.5;
+  color: #000;
+  font-size: 18px;
+
+}

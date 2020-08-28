@@ -1,6 +1,9 @@
 <?php
 //include config
-require_once('../includes/config.php');
+require_once('../model/auther.php');
+session_start();
+
+if(isset($_SESSION["admininfo"])){
 
 
 ?>
@@ -63,10 +66,17 @@ require_once('../includes/config.php');
 					<?php
 
 
-				$query = "SELECT * from author ";
-			  	$stmt = $db->prepare($query);
-			  	$stmt->execute();
-        		$result = $stmt->get_result();
+				// $query = "SELECT * from author ";
+			  	// $stmt = $db->prepare($query);
+			  	// $stmt->execute();
+				// $result = $stmt->get_result();
+				
+				
+				$user = new Auther();
+				$result = $user -> show_users();
+
+			
+				
 
 
 
@@ -111,3 +121,13 @@ require_once('../includes/config.php');
 </body>
 
 </html>
+
+<?php
+
+}else
+{
+	header("Location: login.php");
+	exit();
+}
+
+?>

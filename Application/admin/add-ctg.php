@@ -1,5 +1,8 @@
 <?php //include config
 require_once('../includes/config.php');
+session_start();
+
+if(isset($_SESSION["admininfo"])){
 
 ?>
 <html>
@@ -74,3 +77,13 @@ require_once('../includes/config.php');
 </body>
 
 </html>
+
+<?php
+
+}else
+{
+	header("Location: login.php");
+	exit();
+}
+
+?>

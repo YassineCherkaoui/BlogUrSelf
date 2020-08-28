@@ -1,24 +1,37 @@
 <?php
 
-require('../includes/config.php');
+require_once('../model/post.php');
+require_once('../model/auther.php');
+require_once('../model/category.php');
 require('../includes/session.php'); 
 
+// session_start();
+if (isset($_SESSION['username'])){
 
 
-$queryC= "SELECT * FROM category";
-$stmtC =$db->prepare($queryC);
-$stmtC->execute();
-$resultC= $stmtC->get_result();
+// $queryC= "SELECT * FROM category";
+// $stmtC =$db->prepare($queryC);
+// $stmtC->execute();
+// $resultC= $stmtC->get_result();
+
+$catg = new Category();
+$resultC = $catg -> show_category( );
+
 
 if (isset($_GET["id"]) && !empty($_GET["id"])) {
 	$poste_id = $_GET["id"];
 
-	$query2= "SELECT * FROM posts WHERE posteID=?";
-	$stmt =$db->prepare($query2);
-	$stmt->bind_param("i",$poste_id);
-	$stmt->execute();
-	$result2= $stmt->get_result();
-	$row3 = $result2->fetch_assoc();
+	// $query2= "SELECT * FROM posts WHERE posteID=?";
+	// $stmt =$db->prepare($query2);
+	// $stmt->bind_param("i",$poste_id);
+	// $stmt->execute();
+	// $result2= $stmt->get_result();
+    // $row3 = $result2->fetch_assoc();
+    $post = new Post();
+    $result2 = $post->view_single_post($poste_id);
+    $row3 = $result2->fetch_assoc();
+
+
 }
 else{
 	$poste_id = null;
@@ -478,3 +491,15 @@ else{
 </style>
 
 </html>
+
+
+<?php
+
+}
+else
+{
+	header("Location: login.php");
+	exit();
+}
+
+?>

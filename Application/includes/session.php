@@ -45,4 +45,19 @@ function messageErrorType()
        return $output;
    }
 }
+
+
+function messageAdminLogin()
+{
+   if (isset($_SESSION["messageAdminLogin"])) {
+       $output = '<div class="alert alert-danger" role="alert">';
+       $output .=htmlentities($_SESSION["messageAdminLogin"]);
+       $output .="</div>";
+       $_SESSION["messageAdminLogin"] = null;
+       return $output;
+   }
+}
+
+
+
 ?>

@@ -12,6 +12,14 @@
 
 /* = PLUGIN
 ------------------- */
+body {
+    background-image: url("../style/images/add_post_bg.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 pre {
     margin: 0;
     padding: 0;
@@ -203,9 +211,7 @@ label.custom-select {
 
 /* = DEMO MODE
 ------------------*/
-body {
-    background: #fff;
-}
+
 
 #thisForm {
     box-shadow: 0 5px 25px 10px #fff;

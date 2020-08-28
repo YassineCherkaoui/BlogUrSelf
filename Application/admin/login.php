@@ -1,120 +1,143 @@
-?php
-//include config
-require_once('../includes/config.php');
-
-
-//check if already logged in
-if ($user->is_logged_in()) {
-	header('Location: index.php');
-}
-?>
+<?php require('../includes/session.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<title>Admin Login</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="../style/images/fiveicon.png" />
-	<link rel="stylesheet" type="text/css" href="style/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../style/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../style/fonts/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" type="text/css" href="../style/vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="../style/vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="../style/vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="../style/vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="../style/vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="../style/css/util.css">
-	<link rel="stylesheet" type="text/css" href="../style/css/main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-
 <body>
+
+	<div class="login">
+	
 	<?php
-
-	//process login form if submitted
-	if (isset($_POST['submit'])) {
-
-		$username = trim($_POST['username']);
-		$password = trim($_POST['password']);
-
-		if ($user->login($username, $password)) {
-
-			//logged in return to index page
-			header('Location: index.php');
-			exit;
-		} else {
-			$message = '<p class="error">Wrong username or password</p>';
-		}
-	} //end if submit
-
-	if (isset($message)) {
-		echo $message;
-	}
+	echo messageAdminLogin();
 	?>
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('../style/images/banner5.jpg');">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form" action="" method="post">
-					<span class="login100-form-logo">
-						<i><img src="../style/images/fiveicon.png" style="width: 56%; margin-left: 24px;"></i>
+	
+	<div class="login-screen">
+			<div class="app-title">
+			<span class="login100-form-logo">
+						<i><img src="../style/images/fiveicon.png" style="width: 15%;"></i>
 					</span>
+				<h1>Login</h1>
+			</div>
 
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
+			<div class="login-form">
+				<form action="login_back.php" method="post">
+			
+				<div class="control-group">
+				<input type="email" name="email" class="login-field" value="" placeholder="Email" id="login-name" >
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
+				<div class="control-group">
+				<input type="password" name="password" class="login-field" value="" placeholder="password" id="login-pass" >
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<button type="submit" name="submit" class="login100-form-btn">
-							Login
-						</button>
-					</div>
-
-					<div class="text-center p-t-90">
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>
-					</div>
+				<button type="submit" name="admin_login" class="btn btn-primary btn-large btn-block">login</button>
 				</form>
 			</div>
 		</div>
 	</div>
-
-
-
-	<!--===============================================================================================-->
-	<script src="../style/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="../style/vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="../style/vendor/bootstrap/js/popper.js"></script>
-	<script src="../style/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="../style/vendor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="../style/vendor/daterangepicker/moment.min.js"></script>
-	<script src="../style/vendor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
-	<script src="style/vendor/countdowntime/countdowntime.js"></script>
-	<!--===============================================================================================-->
-	<script src="../style/js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body>
+<style>
+	* {
+		box-sizing: border-box;
+	}
 
+	*:focus {
+		outline: none;
+	}
+
+	body {
+		font-family: Arial;
+		background-color: #3498DB;
+		padding: 50px;
+	}
+
+	.login {
+		margin: 20px auto;
+		width: 400px;
+	}
+
+	.login-screen {
+		background-color: #FFF;
+		padding: 20px;
+		border-radius: 5px
+	}
+
+	.app-title {
+		text-align: center;
+		color: #777;
+	}
+
+	.login-form {
+		text-align: center;
+	}
+
+	.control-group {
+		margin-bottom: 10px;
+	}
+
+	input {
+		text-align: center;
+		background-color: #ECF0F1;
+		border: 2px solid transparent;
+		border-radius: 3px;
+		font-size: 16px;
+		font-weight: 200;
+		padding: 10px 0;
+		width: 250px;
+		transition: border .5s;
+	}
+
+	input:focus {
+		border: 2px solid #3498DB;
+		box-shadow: none;
+	}
+
+	.btn {
+		border: 2px solid transparent;
+		background: #3498DB;
+		color: #ffffff;
+		font-size: 16px;
+		line-height: 25px;
+		padding: 10px 0;
+		text-decoration: none;
+		text-shadow: none;
+		border-radius: 3px;
+		box-shadow: none;
+		transition: 0.25s;
+		display: block;
+		width: 250px;
+		margin: 0 auto;
+	}
+
+	.btn:hover {
+		background-color: #2980B9;
+	}
+
+	.login-link {
+		font-size: 12px;
+		color: #444;
+		display: block;
+		margin-top: 12px;
+	}
+</style>
 </html>
+
+
+
+
+
+<?php
+//include config
+require_once('../includes/config.php');
+
+?>

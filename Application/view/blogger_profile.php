@@ -1,8 +1,25 @@
 <?php
- require('../includes/config.php'); 
+//  require('../includes/config.php'); 
  require('../includes/session.php'); 
+ require_once('../model/post.php');
+require_once('../model/auther.php');
+require_once('../model/category.php');
+
+
+ $category = new Category();
+$resultC = $category -> show_category();
+
+
+
+  if (isset($_SESSION['username'])){
+    
+ 
+
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -29,24 +46,11 @@
 </head>
 
 
-
-
-
-
-
-
-
-
-
-
-
 <body class="profile-page">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.php"><img src="../style/images/logo.png" style="
-    width: 17%;
-    margin-top: -2%;
-"></a>
+            <a class="navbar-brand" href="index.php"><img src="../style/images/logo.png"
+                    style="width: 17%; margin-top: -2%;"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -58,9 +62,33 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            CATEGORIES
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <?php
+		
+
+                    while ($rowC = $resultC->fetch_assoc()) { ?>
+                            <a class="dropdown-item"
+                                href="category.php?category=<?= $rowC['name']; ?>"><?= $rowC['name']; ?></a>
+
+
+
+                            <?php
+		}
+
+		?>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.php">About</a>
                     </li>
+
                     
 
                     <li class="nav-item dropdown">
@@ -101,12 +129,8 @@
                                 $id =  $_SESSION["author_id"];
                                 
 
-
-                                $query= "SELECT * FROM author WHERE author_id=?";
-                                $stmt =$db->prepare($query);
-                                $stmt->bind_param("i",$id);
-                                $stmt->execute();
-                                $result= $stmt->get_result();
+                                $auther = new Auther();
+                                $result = $auther ->show_info($id);
                                 $row3 = $result->fetch_assoc();
                             } 
                             ?>
@@ -157,13 +181,9 @@
 
                         <?php
         
-        
 
-                    $query = "SELECT * from posts WHERE author_id=?";
-                        $stmt = $db->prepare($query);
-                        $stmt->bind_param("i",$id);
-                        $stmt->execute();
-                    $result = $stmt->get_result();
+                    $post = new Post();
+                    $result =  $post ->view_all_post_of_user($id);
                 
 
                     while ( $row = $result->fetch_assoc()) {
@@ -462,3 +482,15 @@
 
 
 </html>
+
+
+<?php
+
+}
+else
+{
+	header("Location: login.php");
+	exit();
+}
+
+?>

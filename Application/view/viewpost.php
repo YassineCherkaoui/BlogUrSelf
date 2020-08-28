@@ -1,26 +1,26 @@
-<?php require('../includes/config.php');
+<?php 
+
+require_once('../model/post.php');
+require_once('../model/auther.php');
+require_once('../model/category.php');
+
+session_start();
+
+
+
+$category = new Category();
+$resultC = $category -> show_category();
 
 
 if (isset($_GET["id"]) && !empty($_GET["id"])) {
 	$poste_id = $_GET["id"];
 
-	$query2= "SELECT * FROM posts WHERE posteID=?";
-	$stmt =$db->prepare($query2);
-	$stmt->bind_param("i",$poste_id);
-	$stmt->execute();
-	$result2= $stmt->get_result();
+	$post = new Post();
+	$result2 = $post->view_single_post($poste_id);
 	$row3 = $result2->fetch_assoc();
 
 	$views = $row3["views"] + 1;
-
-	$count = "UPDATE posts SET views=? WHERE posteID=?";
-	$stmt =$db->prepare($count);
-	$stmt->bind_param("ii",$views,$poste_id);
-	$stmt->execute();
-	
-
-
-
+	$views_post = $post -> update_views($views,$poste_id);
 }
 else{
 	$poste_id = null;
@@ -45,7 +45,7 @@ else{
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>blogUeSelf</title>
+		<title>blogUeSelf </title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -57,49 +57,9 @@ else{
 
 
 	</head>
-</head>
 
-<body>
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-		<div class="container">
-			<a class="navbar-brand" href="index.html"><img src="../style/images/logo.png" width="23%"></a>
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				Menu
-				<i class="fas fa-bars"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="index.php">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="about.php">About</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="contact.php">Contact</a>
-					</li>
-					<li class="nav-item">
-						<a class="btn" href="#" style="color: #FFC273;">Start Writing</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<header class="masthead" style="background-image: url('../style/home/img/home-bg.jpg')">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-10 mx-auto">
-					<div class="site-heading">
-						<h1>BlogUrSelf</h1>
-						<span class="subheading">Create a unique and beautiful blog. It’s easy and free.</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+	<?php include_once("header.php") ?>
+
 
 	<div>
 		<div class="container">
@@ -115,17 +75,12 @@ else{
 					<!-- Author -->
 
 					<?php
-
-					$queryA= "SELECT * FROM author WHERE author_id=?";
-					$stmtA =$db->prepare($queryA);
-					$stmtA->bind_param("i",$row3['author_id']);
-					$stmtA->execute();
-					$resultA= $stmtA->get_result();
+					$auther = new Auther();
+					$resultA =$auther -> show_info($row3['author_id']);
 					$rowA = $resultA->fetch_assoc();
 					
-					
-					
 					?>
+
 					<p class="lead">
 						by
 						<a href="blogger.php?id=<?= $rowA['author_id']; ?>"><?= $rowA['username']; ?></a>
@@ -166,7 +121,6 @@ else{
 								<button name="submit" type="submit" id="submit" class="btn btn-primary">Submit</button>
 
 							</form>
-							<span>you must login to continue</span>
 
 						</div>
 						<span id="comment_message"></span>
@@ -182,17 +136,13 @@ else{
 
 					<!-- Categories Widget -->
 					<div class="card my-4">
-						<h5 class="card-header">Popular This Week</h5>
+						<h5  id="card-header" class="card-header">Popular This Week</h5>
 						<div class="widget PopularPosts" data-version="1" id="PopularPosts1">
 							<div class="widget-content popular-posts">
 
 								<?php
-							$query3= "SELECT * FROM posts ORDER BY postDate ASC LIMIT 10";
-							$stmt1 =$db->prepare($query3);
-							$stmt1->execute();
-							$result3= $stmt1->get_result();
-							
 
+							$result3 = $post -> view_last_post();
 							while ($row4 = $result3->fetch_assoc()) { ?>
 
 								<div class="row">
@@ -201,7 +151,7 @@ else{
 											src="<?= $row4['postImg']; ?>" alt="" srcset="">
 									</div>
 									<div class="col -md-auto">
-										<p><a
+										<p><a id="alink"
 												href="viewpost.php?id=<?= $row4['posteID']; ?>"><?= $row4['postTitle']; ?></a>
 										</p>
 									</div>
@@ -210,10 +160,6 @@ else{
 								<?php	
 							}
 							?>
-
-
-
-
 							</div>
 						</div>
 
@@ -226,92 +172,11 @@ else{
 			</div>
 
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 	</div>
 
+
 	<!-- Site footer -->
-	<footer class="site-footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12 col-md-6">
-					<h6>About</h6>
-					<p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help the
-						upcoming
-						programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as
-						the code
-						wants to be simple. We will help programmers build up concepts in different programming
-						languages that
-						include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
-				</div>
-
-				<div class="col-xs-6 col-md-3">
-					<h6>Categories</h6>
-					<ul class="footer-links">
-						<li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-						<li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-						<li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-						<li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-						<li><a href="http://scanfcode.com/category/android/">Android</a></li>
-						<li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-					</ul>
-				</div>
-
-				<div class="col-xs-6 col-md-3">
-					<h6>Quick Links</h6>
-					<ul class="footer-links">
-						<li><a href="http://scanfcode.com/about/">About Us</a></li>
-						<li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-						<li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-						<li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-						<li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-					</ul>
-				</div>
-			</div>
-			<hr>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-sm-6 col-xs-12">
-					<p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by
-						<a href="#">Scanfcode</a>.
-					</p>
-				</div>
-
-				<div class="col-md-4 col-sm-6 col-xs-12">
-					<ul class="social-icons">
-						<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-						<li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-
-
-
-
-
-
-	<!-- <script src="../style/style/style/vendor/jquery/jquery.min.js"></script> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="../style/style/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="../style/js/clean-blog.min.js"></script>
+	<?php include_once("footer.php") ?>
 
 	<script>
 		$(document).ready(function () {
@@ -363,16 +228,13 @@ else{
 
 
 
-<style>
-
-.postCont img{
-	max-width: 100%;
-    height: auto;
-  /* width:720px; */
-}
-
-
-</style>
+	<style>
+		.postCont img {
+			max-width: 100%;
+			height: auto;
+			/* width:720px; */
+		}
+	</style>
 
 
 

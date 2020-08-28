@@ -1,5 +1,7 @@
 <?php require('../includes/config.php');
 require('../includes/session.php'); 
+require('../model/auther.php');
+
 
 
 
@@ -18,11 +20,14 @@ if(isset($_POST["Register_submit"])){
 
     $password_hash=password_hash($password, PASSWORD_DEFAULT);
 
-    $query= "SELECT * FROM author WHERE email=?";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param("s",$email);
-    $stmt->execute();
-    $result= $stmt->get_result();
+    $auther = new Auther();
+    $result  = $auther -> auther_select($email);
+
+    // $query= "SELECT * FROM author WHERE email=?";
+    // $stmt = $db->prepare($query);
+    // $stmt->bind_param("s",$email);
+    // $stmt->execute();
+    // $result= $stmt->get_result();
     $row1 = mysqli_num_rows($result);
 
 
@@ -39,9 +44,15 @@ if(isset($_POST["Register_submit"])){
 
         
     }else{
-        $stmt =$db->prepare("INSERT Into author (username,email,password,author_img) values(?,?,?,?)");
-		$stmt->bind_param("ssss", $username, $email, $password_hash,$profileImg);
-		$stmt->execute();		
+        // $stmt =$db->prepare("INSERT Into author (username,email,password,author_img) values(?,?,?,?)");
+		// $stmt->bind_param("ssss", $username, $email, $password_hash,$profileImg);
+        // $stmt->execute();
+        
+        $result2  = $auther -> new_auther($username, $email, $password_hash,$profileImg);
+
+        
+        
+        
         header("Location: ../view/login.php");
         $_SESSION["message2"] ="Say Great now you can login";
 
@@ -71,11 +82,14 @@ if(isset($_POST["submit_Login"])){
        
     }
     else { 
-        $query= "SELECT * FROM author WHERE email=?";
-        $stmt =$db->prepare($query);
-        $stmt->bind_param("s",$email);
-        $stmt->execute();
-        $result= $stmt->get_result();
+        // $query= "SELECT * FROM author WHERE email=?";
+        // $stmt =$db->prepare($query);
+        // $stmt->bind_param("s",$email);
+        // $stmt->execute();
+        // $result= $stmt->get_result();
+        $auther = new Auther();
+        $result  = $auther -> auther_select($email);
+
         $row2 = $result->fetch_assoc();
 
         $password_check = password_verify($password, $row2["password"]);
@@ -95,6 +109,7 @@ if(isset($_POST["submit_Login"])){
 
 
 }
+
 
 
 
