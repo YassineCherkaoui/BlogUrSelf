@@ -25,9 +25,8 @@ $resultC = $category -> show_category();
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="../style/home/css/about.css">
-  <link href="../style/home/css/clean-blog.css" rel="stylesheet">
-  <link href="../css/clean-blog.css" rel="stylesheet">
+  <link rel="stylesheet" href="../public/css/about.css">
+  <link href="../public/css/clean-blog.css" rel="stylesheet">
 
 
 
@@ -54,7 +53,7 @@ $resultC = $category -> show_category();
       <div class="col s6 l3 xl3 animated bounceIn">
         <div class="team-box">
           <div class="img-box">
-            <img src="../style/images/yassine.jpg" width="100%">
+            <img src="../public/images/yassine.jpg" width="100%">
             <div id="team_shape-1" class="team-shape" style="clip-path: url(&quot;#team-1&quot;);">
               <svg width="100%" height="100%">
                 <clipPath id="team-1" clipPathUnits="objectBoundingBox">
@@ -64,8 +63,8 @@ $resultC = $category -> show_category();
             </div>
             <div class="team-hover-box">
               <ul>
-                <li><a href="#"><img src="../style/images/facebook.png" width="70%" style="margin-top: -4px;"></a></li>
-                <li><a href="#"><img src="../style/images/instagram.png" width="70%" style="margin-top: -4px;"></a></li>
+                <li><a href="#"><img src="../public/images/facebook.png" width="70%" style="margin-top: -4px;"></a></li>
+                <li><a href="#"><img src="../public/images/instagram.png" width="70%" style="margin-top: -4px;"></a></li>
               </ul>
               <p>Developer at youcode Full stuck Developer</p>
             </div>
@@ -87,9 +86,9 @@ $resultC = $category -> show_category();
             </div>
             <div class="team-hover-box">
               <ul>
-                <li><a href="https://www.facebook.com/abde.rahimii"><img src="../style/images/facebook.png" width="70%"
+                <li><a href="https://www.facebook.com/abde.rahimii"><img src="../public/images/facebook.png" width="70%"
                       style="margin-top: -4px;"></a></li>
-                <li><a href="https://www.facebook.com/abde.rahimii"><img src="../style/images/instagram.png" width="70%"
+                <li><a href="https://www.facebook.com/abde.rahimii"><img src="../public/images/instagram.png" width="70%"
                       style="margin-top: -4px;"></a></li>
               </ul>
               <p>Developer at youcode Full stuck Developer</p>

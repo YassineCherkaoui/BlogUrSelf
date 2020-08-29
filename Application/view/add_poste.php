@@ -27,9 +27,9 @@ if (isset($_SESSION['username'])){
 
 
 
-  <link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-  <link href="../css/add_post.css" rel="stylesheet">
-  <link href="../css/blogger-add-post.css" rel="stylesheet">
+  <link rel="shortcut icon" href="../public/images/fiveicon.png" type="image/x-icon">
+  <link href="../public/css/add_post.css" rel="stylesheet">
+  <link href="../public/css/blogger-add-post.css" rel="stylesheet">
 
 
 
@@ -85,7 +85,7 @@ if (isset($_SESSION['username'])){
 
   </div>
 
-  <script src="../js/text_editor.js"></script>
+  <script src="../public/js/text_editor.js"></script>
 
 
 
@@ -93,9 +93,7 @@ if (isset($_SESSION['username'])){
 
 </body>
 
-<style>
-  
-</style>
+
 
 </html>
 

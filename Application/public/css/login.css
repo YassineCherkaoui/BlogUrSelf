@@ -16,7 +16,7 @@ body {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    background: url('../style/images/loginBg.jpg') center/cover fixed;
+    background: url('../images/loginBg.jpg') center/cover fixed;
     display: flex;
     justify-content: center;
     align-items: center;

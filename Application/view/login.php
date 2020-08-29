@@ -8,8 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<title>blogUeSelf | login </title> 
-	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-  <link href="../css/login.css" rel="stylesheet">
+	<link rel="shortcut icon" href="../public/images/fiveicon.png" type="image/x-icon">
+  <link href="../public/css/login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 	<div id="formContainer">
 		<div class="formLeft">
 		
-			<img src="../style/images/logo.png">
+			<img src="../public/images/logo.png">
 			<br>
 			<div>
 <?php
@@ -29,24 +29,6 @@
 </div>
 		</div>
 		<div class="formRight">
-			<!-- Forgot password form -->
-			<!-- <form id="forgot" class="otherForm">
-				<header>
-					<h1>Forgot Password</h1>
-					<p>Seems like your password is missing</p>
-				</header>
-				<section>
-					<label>
-						<p>Email</p>
-						<input type="email" placeholder=" ">
-						<div class="border"></div>
-					</label>
-					<button type="submit">Send email</button>
-				</section>
-				<footer>
-					<button type="button" class="forgotBtn">Back</button>
-				</footer>
-			</form> -->
 
 			<!-- Login form -->
 			<form id="login" action="../controller/login_back.php" method="POST">

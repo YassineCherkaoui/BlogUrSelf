@@ -1,15 +1,9 @@
 <?php
 
-
-//include config
-
 require_once('../model/post.php');
 require_once('../model/auther.php');
 require_once('../model/category.php');
 require_once('../model/comment.php');
-
-
-
 
 
 if (isset($_GET['postId'])) {
@@ -20,20 +14,11 @@ if (isset($_GET['postId'])) {
 
     $post = new Post();
     $post -> delete_post($id);
-           
-
-    // $query2 = "DELETE FROM posts WHERE posteID = ?";
-    // $stmt =$db->prepare($query2);
-    // $stmt->bind_param("i",$id);
-    // $stmt->execute();
 
     header('Location: index.php'); 
     # code...
 }
 if (isset($_GET['authorId'])) {
-
-
-
 
     $id = $_GET['authorId'];
     $user = new Auther();
@@ -69,13 +54,6 @@ if (isset($_POST['ctg'])) {
 
     $category = new Category();
     $category -> add_category($ctg);
-
-    // $stmt =$db->prepare("INSERT INTO category (name) VALUES (?)");
-    // $stmt->bind_param('s', $ctg);
-    //  $stmt->execute();
-
-   
-
     header('Location: category.php'); 
     # code...
 }

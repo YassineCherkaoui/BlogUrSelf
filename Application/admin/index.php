@@ -1,6 +1,5 @@
 <?php
-//include config
-// require_once('../includes/config.php');
+
 require('../model/post.php');
 
 session_start();
@@ -26,12 +25,11 @@ if(isset($_SESSION["admininfo"])){
 	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<title>Hello, world!</title>
-	<link rel="stylesheet" href="../style/js/js.js">
-	<link rel="stylesheet" href="../style/css/admin.css">
+	<title>Admin Dashbord</title>
+	<link rel="stylesheet" href="../public/css/admin.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../public/images/fiveicon.png" type="image/x-icon">
 	
 </head>
 
@@ -41,7 +39,7 @@ if(isset($_SESSION["admininfo"])){
 			<i class="fa fa-bars"></i>
 			<span>Close</span>
 		</a>
-		<div class="logo"><img src="../style/images/fiveicon.png" width="2%">
+		<div class="logo"><img src="../public/images/fiveicon.png" width="2%">
 			Admin Panel
 		</div>
 	</div>
@@ -74,15 +72,6 @@ if(isset($_SESSION["admininfo"])){
 
 				$post = new Post();
 				$result = $post -> view_all_post();
-
-
-
-				// $query = "SELECT * from posts ";
-			  	// $stmt = $db->prepare($query);
-			  	// $stmt->execute();
-        		// $result = $stmt->get_result();
-
-
 
 					try {
 

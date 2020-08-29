@@ -38,8 +38,8 @@ else{
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 
-  <link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-  <link href="../css/clean-blog.css" rel="stylesheet">
+  <link rel="shortcut icon" href="../public/images/fiveicon.png" type="image/x-icon">
+  <link href="../public/css/clean-blog.css" rel="stylesheet">
 
 
 </head>

@@ -19,11 +19,11 @@ if(isset($_SESSION["admininfo"])){
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
 		rel="stylesheet">
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-	<title>Add Category</title>
-	<link rel="stylesheet" href="../style/css/addpost.css">
+	<title>Admin Dashbord</title>
+	<link rel="stylesheet" href="../public/css/addpost.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="../public/images/fiveicon.png" type="image/x-icon">
 </head>
 
 <body>
@@ -32,7 +32,7 @@ if(isset($_SESSION["admininfo"])){
 			<i class="fa fa-bars"></i>
 			<span>Close</span>
 		</a>
-		<div class="logo"><img src="../style/images/fiveicon.png" width="2%">
+		<div class="logo"><img src="../public/images/fiveicon.png" width="2%">
 			Admin Panel
 		</div>
 	</div>

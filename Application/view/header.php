@@ -3,7 +3,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="index.php"><img src="../style/images/logo.png" width="23%"></a>
+      <a class="navbar-brand" href="index.php"><img src="../public/images/logo.png" width="23%"></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
@@ -80,7 +80,7 @@
 
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('../style/home/img/home-bg.jpg')">
+  <header class="masthead" style="background-image: url('../public/img-site/home-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
