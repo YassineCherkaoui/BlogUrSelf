@@ -38,16 +38,16 @@ $resultC = $category -> show_category();
     <link rel="stylesgeet"
         href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
 
-        <link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
-        <link href="../public/css/clean-blog.css" rel="stylesheet">
-        <link href="../public/css/blogger_profile.css" rel="stylesheet">
-        
+    <link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
+    <link href="../public/css/clean-blog.css" rel="stylesheet">
+    <link href="../public/css/blogger_profile.css" rel="stylesheet">
+
 
 </head>
 
 
 <body class="profile-page">
-<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="index.php"><img src="../public/images/logo.png"
                     style="width: 17%; margin-top: -2%;"></a>
@@ -89,7 +89,7 @@ $resultC = $category -> show_category();
                         <a class="nav-link" href="about.php">About</a>
                     </li>
 
-                    
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -211,7 +211,7 @@ $resultC = $category -> show_category();
                                             href="viewpost.php?id=<?= $row['posteID']; ?>"><?= $row['postTitle']; ?></a>
                                     </h2>
                                     <div class="post-meta align-items-center text-left clearfix">
-                                    <a href="edit_poste.php?id=<?= $row['posteID']; ?>">Edit Post</a>
+                                        <a href="edit_poste.php?id=<?= $row['posteID']; ?>">Edit Post</a>
                                     </div>
 
 
@@ -258,53 +258,55 @@ $resultC = $category -> show_category();
 
     <!-- Site footer -->
     <footer class="site-footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-6">
-        <h6>About</h6>
-        <p class="text-justify">BlogUrSelf is not like any other platform on the internet
-          BlogUrSelf is built for technologists to read, write, and publish. We are an open and international community
-          of 20 contributing writers publishing stories and expertise for 4000 curious and insightful monthly readers
-          BlogUrSelf is the best platform with millions of users worldwide.
-          We make it easy for everyone to create a beautiful, professional Blog
-          and find compelling ideas, knowledge, and perspectives</p>
-      </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>About</h6>
+                    <p class="text-justify">BlogUrSelf is not like any other platform on the internet
+                        BlogUrSelf is built for technologists to read, write, and publish. We are an open and
+                        international community
+                        of 20 contributing writers publishing stories and expertise for 4000 curious and insightful
+                        monthly readers
+                        BlogUrSelf is the best platform with millions of users worldwide.
+                        We make it easy for everyone to create a beautiful, professional Blog
+                        and find compelling ideas, knowledge, and perspectives</p>
+                </div>
 
-      <div class="col-xs-6 col-md-3">
-        <h6> Top Categories</h6>
-        <ul class="footer-links">
-          <li>Web development</li>
-          <li>Blockchain</li>
-          <li>Security</li>
-          <li>ML/AI</li>
-          <li>Cryptocurrency</li>
-          <li>Marketing</li>
-        </ul>
-      </div>
+                <div class="col-xs-6 col-md-3">
+                    <h6> Top Categories</h6>
+                    <ul class="footer-links">
+                        <li>Web development</li>
+                        <li>Blockchain</li>
+                        <li>Security</li>
+                        <li>ML/AI</li>
+                        <li>Cryptocurrency</li>
+                        <li>Marketing</li>
+                    </ul>
+                </div>
 
-      <div class="col-xs-6 col-md-3">
-        <h6>Contact Us </h6>
-        <ul class="footer-links">
-          <li>Email : contact@blogurself.com</li>
-          <li>Tele : +212 732197232</li>
-        </ul>
-      </div>
+                <div class="col-xs-6 col-md-3">
+                    <h6>Contact Us </h6>
+                    <ul class="footer-links">
+                        <li>Email : contact@blogurself.com</li>
+                        <li>Tele : +212 732197232</li>
+                    </ul>
+                </div>
 
-    </div>
-    <hr>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 col-sm-6 col-xs-12">
-        <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
-          <a href="#">BlogUrSelf</a>.
-        </p>
-      </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
+                        <a href="#">BlogUrSelf</a>.
+                    </p>
+                </div>
 
 
-    </div>
-  </div>
-</footer>
+            </div>
+        </div>
+    </footer>
 
 
 

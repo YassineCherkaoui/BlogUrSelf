@@ -2,7 +2,7 @@
 require_once('../model/post.php');
 require_once('../model/auther.php');
 require_once('../model/category.php');
-require('../includes/session.php'); 
+require('../includes/session.php');
 
 
  $category = new Category();
@@ -18,7 +18,7 @@ if (isset($_GET["id"])){
     $result2 = $auther_select_id -> auther_select_id($author_id);
     $row3 = $result2->fetch_assoc();
 
-} 
+}
 
 
 ?>
@@ -40,9 +40,9 @@ if (isset($_GET["id"])){
     <link rel="stylesgeet"
         href="https://rawgit.com/creativetimofficial/material-kit/master/assets/css/material-kit.css">
 
-    <link rel="shortcut icon" href="../public/images/fiveicon.png" type="image/x-icon">
-    <link href="../public/css/clean-blog.css" rel="stylesheet">
-    <link href="../public/css/blogger_profile.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../style/images/fiveicon.png" type="image/x-icon">
+        <link href="../public/css/clean-blog.css" rel="stylesheet">
+        <link href="../public/css/blogger_profile.css" rel="stylesheet">
 
 
 </head>
@@ -50,7 +50,7 @@ if (isset($_GET["id"])){
 <body class="profile-page">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="index.php"><img src="../style/images/logo.png"
+            <a class="navbar-brand" href="index.php"><img src="../public/images/logo.png"
                     style="width: 17%; margin-top: -2%;"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -72,7 +72,7 @@ if (isset($_GET["id"])){
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                             <?php
-		
+
 
                     while ($rowC = $resultC->fetch_assoc()) { ?>
                             <a class="dropdown-item"
@@ -113,9 +113,9 @@ if (isset($_GET["id"])){
 
                     <?php   }
 
-          
-          
-          
+
+
+
           ?>
 
                 </ul>
@@ -170,73 +170,96 @@ if (isset($_GET["id"])){
             </div>
         </div>
 
-       
+
 
         <div class="container">
-            <div class="site-section">
-                <div class="container">
-                    <div class="row mb-5">
-                        <div class="col-12">
-                            <h2>Recent Posts</h2>
-                        </div>
-                    </div>
-                    <div class="row">
+             <div class="site-section">
+                 <div class="container">
+                     <div class="row mb-5">
+                         <div class="col-12">
+                             <h2>Recent Posts</h2>
+                         </div>
+                     </div>
+                     <div class="row">
+ 
+                         <?php
+         
+ 
+                     $post = new Post();
+                     
 
-                        <?php
-        
-        
-
-   
-        $post = new Post();
-        $result = $post ->view_all_post_of_user($author_id);
-       
-
-        while ( $row = $result->fetch_assoc()) {
-
-          $author_id = $row['author_id'];
-
-          $auther = new Auther();
-          $result2result2 =$auther -> show_info($author_id);
-          $row3 = $result2->fetch_assoc();
-          ?>
-
-                        <div class="col-lg-4 mb-4">
-                            <div class="entry2">
-                                <a name="posteID" href="viewpost.php?id=<?= $row['posteID']; ?>"><img
-                                        style="width: 364px;vertical-align: middle;border-style: none;height: 240px;"
-                                        src="<?= $row['postImg']; ?>"></a>
-                                <div class="excerpt">
-                                    <span
+                     $result =  $post ->view_all_post_of_user($author_id);
+                 
+ 
+                     while ( $row = $result->fetch_assoc()) {
+ 
+          
+ 
+ 
+ 
+          
+ 
+           
+           
+           
+           ?>
+ 
+                         <div class="col-lg-4 mb-4">
+                             <div class="entry2">
+                                 <a name="posteID" href="viewpost.php?id=<?= $row['posteID']; ?>"><img
+                                         style="width: 364px;vertical-align: middle;border-style: none;height: 240px;"
+                                         src="<?= $row['postImg']; ?>"></a>
+                                 <div class="excerpt">
+                                 <span
                                         class="post-category text-white bg-secondary mb-3"><?= $row['category']; ?></span>
-
-                                    <h2><a name="posteID"
-                                            href="viewpost.php?id=<?= $row['posteID']; ?>"><?= $row['postTitle']; ?></a>
-                                    </h2>
-                                    <div class="post-meta align-items-center text-left clearfix">
-
-
-
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <?php } ?>
-
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-
-
-
-
-
-    </div>
+ 
+ 
+                                     <h2><a class="h6" name="posteID"
+                                             href="viewpost.php?id=<?= $row['posteID']; ?>"><?= $row['postTitle']; ?></a>
+                                     </h2>
+                                     <!-- <div class="post-meta align-items-center text-left clearfix">
+                                         <a href="edit_poste.php?id=<?= $row['posteID']; ?>">Edit Post</a>
+                                     </div> -->
+ 
+ 
+ 
+ 
+                                 </div>
+                             </div>
+                         </div>
+ 
+ 
+ 
+                         <?php } ?>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                     </div>
+ 
+                 </div>
+             </div>
+ 
+         </div>
 
     <!-- Site footer -->
     <footer class="site-footer">
