@@ -5,7 +5,7 @@ class Dbconnect{
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "bbg";
+        $dbname = "BlogUrself-db";
         $db = new mysqli($servername, $username, $password,$dbname );
          return $db;
 
@@ -14,7 +14,3 @@ class Dbconnect{
         }
      }
 }
-
-
-
-?>

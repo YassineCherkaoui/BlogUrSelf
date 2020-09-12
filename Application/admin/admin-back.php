@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 require_once('../model/post.php');
 require_once('../model/auther.php');
@@ -65,5 +66,5 @@ if (isset($_POST['ctg'])) {
 
 
 
-
+ob_end_flush();
 ?>

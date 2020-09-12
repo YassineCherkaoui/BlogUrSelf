@@ -1,4 +1,5 @@
 <?php
+ob_start();
  require('../includes/config.php');
  session_start();
 
@@ -30,4 +31,5 @@ $data = array(
    );
    
    echo json_encode($data);
+   ob_end_flush();
 ?>

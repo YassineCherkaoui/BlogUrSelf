@@ -1,12 +1,10 @@
 <?php
 
-// session_start();
 
 $servername = "localhost";
 $username = "root";
-// $password = ""; if you dont have any password
 $password = "";
-$dbname = "bbg";
+$dbname = "Blogurself-db";
 
 // Create connection
 $db = new mysqli($servername, $username, $password,$dbname );

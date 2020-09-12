@@ -1,4 +1,5 @@
 <?php
+ob_start();
 //  require('../includes/config.php');
 
  require('../model/auther.php');
@@ -59,5 +60,5 @@ if(ISSET($_POST['editUserProfile'])){
 
 
 
-
+ob_end_flush();
 ?>

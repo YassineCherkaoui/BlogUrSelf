@@ -1,5 +1,5 @@
 <?php
-//  require('../includes/config.php');
+ob_start();
  require('../model/post.php');
  session_start();
 
@@ -102,13 +102,7 @@ if(ISSET($_POST['edit-post'])){
     }else {
         $_SESSION["message5"] ="Allowed file formats .jpg, .jpeg and .png";
     }
-
-
-
     header("location: ../view/blogger_profile.php");
 }
-
+ob_end_flush();
 ?>
-
-
-

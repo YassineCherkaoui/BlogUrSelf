@@ -1,4 +1,5 @@
 <?php //include config
+ob_start();
 require_once('../includes/config.php');
 session_start();
 
@@ -85,5 +86,5 @@ if(isset($_SESSION["admininfo"])){
 	header("Location: login.php");
 	exit();
 }
-
+ob_end_flush();
 ?>

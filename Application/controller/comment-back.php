@@ -1,4 +1,5 @@
 <?php
+ob_start();
  require('../includes/config.php');
  session_start();
 
@@ -66,8 +67,8 @@ $data = array(
 
 
  
-
-		
+ 
+ob_end_flush();		
 ?>
 
 

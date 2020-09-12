@@ -1,4 +1,6 @@
-<?php require('../includes/config.php');
+<?php 
+ob_start();
+require('../includes/config.php');
 // require('../includes/session.php'); 
 session_start();
 
@@ -40,5 +42,5 @@ if(isset($_POST["admin_login"])){
 
 }
 
-
+ob_end_flush();
 ?>

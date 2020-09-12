@@ -59,7 +59,7 @@
 			<form id="register" action="../controller/login_back.php" method="POST" class="otherForm">
 				<header>
 				
-					<h1>Become a Bro</h1>
+					<h1>Become a Member</h1>
 					<p>Register to gain full access</p>
 				</header>
 				<section>

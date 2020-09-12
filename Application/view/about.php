@@ -53,7 +53,7 @@ $resultC = $category -> show_category();
       <div class="col s6 l3 xl3 animated bounceIn">
         <div class="team-box">
           <div class="img-box">
-            <img src="../public/images/yassine.jpg" width="100%">
+            <img src="../public/images/yassine.jpg" style="width:555px;height:416px;">
             <div id="team_shape-1" class="team-shape" style="clip-path: url(&quot;#team-1&quot;);">
               <svg width="100%" height="100%">
                 <clipPath id="team-1" clipPathUnits="objectBoundingBox">
@@ -76,7 +76,7 @@ $resultC = $category -> show_category();
       <div class="col s6 l3 xl3 animated bounceIn">
         <div class="team-box">
           <div class="img-box">
-            <img src="" alt="">
+            <img src="https://pbs.twimg.com/profile_images/1203056019833851908/GjxlTa2o_400x400.jpg" style="width:555px;height:416px;" alt="">
             <div id="team_shape-1" class="team-shape" style="clip-path: url(&quot;#team-1&quot;);">
               <svg width="100%" height="100%">
                 <clipPath id="team-1" clipPathUnits="objectBoundingBox">

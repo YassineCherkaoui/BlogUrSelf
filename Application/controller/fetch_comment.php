@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 
 require('../model/auther.php');
 require('../model/comment.php');
@@ -44,5 +44,5 @@ while ($comment_row = $comment_result->fetch_assoc()) {
 
 }
 
-
+ob_end_flush();
 ?>

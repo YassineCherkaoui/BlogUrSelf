@@ -1,4 +1,6 @@
-<?php require('../includes/config.php');
+<?php
+ob_start();
+require('../includes/config.php');
 require('../includes/session.php'); 
 require('../model/auther.php');
 
@@ -67,11 +69,12 @@ if(isset($_POST["submit_Login"])){
     if (empty($email) || empty($password)) {
         header("Location: ../view/login.php");
         $_SESSION["message"] ="Say All fields must be filled out";
-    }elseif ($row1 == 1) {
-        header("Location: ../view/index.php");
+    }
+    // elseif ($row1 == 1) {
+    //     header("Location: ../view/index.php");
         
        
-    }
+    // }
     else { 
     
         $auther = new Auther();
@@ -104,8 +107,7 @@ if(isset($_POST["submit_Login"])){
 
 
 
-
-
+ob_end_flush();
 ?>
 
 

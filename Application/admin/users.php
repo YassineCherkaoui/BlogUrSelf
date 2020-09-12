@@ -1,4 +1,5 @@
 <?php
+ob_start();
 //include config
 require_once('../model/auther.php');
 session_start();
@@ -116,5 +117,5 @@ if(isset($_SESSION["admininfo"])){
 	header("Location: login.php");
 	exit();
 }
-
+ob_end_flush();
 ?>
